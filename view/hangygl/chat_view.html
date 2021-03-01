@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>聊天窗口</title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/common.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link href="../../css/mui.imageviewer.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+				overflow: hidden;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+			}
+			footer {
+				position: fixed;
+				width: 100%;
+				height: 50px;
+				min-height: 50px;
+				border-top: solid 1px #bbb;
+				left: 0px;
+				bottom: 0px;
+				overflow: hidden;
+				padding: 0px 50px;
+				background-color: #fafafa;
+			}
+			.footer-left {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				left: 0px;
+				bottom: 0px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 100%;
+				padding: 12px 4px;
+			}
+			.footer-right {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				right: 0px;
+				bottom: 0px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 100%;
+				padding: 12px 5px;
+				display: inline-block;
+			}
+			.footer-center {
+				height: 100%;
+				padding: 5px 0px;
+			}
+			.footer-center [class*=input] {
+				width: 100%;
+				height: 100%;
+				border-radius: 5px;
+			}
+			.footer-center .input-text {
+				background: #fff;
+				border: solid 1px #ddd;
+				padding: 10px !important;
+				font-size: 16px !important;
+				line-height: 18px !important;
+				font-family: verdana !important;
+				overflow: hidden;
+			}
+			.footer-center .input-sound {
+				background-color: #eee;
+			}
+			.mui-content {
+				height: 100%;
+				padding: 44px 0px 50px 0px;
+				overflow: auto;
+				background-color: #eaeaea;
+			}
+			#msg-list {
+				height: 100%;
+				overflow: auto;
+				-webkit-overflow-scrolling: touch;
+			}
+			.msg-item {
+				padding: 8px;
+				clear: both;
+			}
+			.msg-item .mui-item-clear {
+				clear: both;
+			}
+			.msg-item .msg-user {
+				width: 38px;
+				height: 38px;
+				border: solid 1px #d3d3d3;
+				display: inline-block;
+				background: #fff;
+				border-radius: 3px;
+				vertical-align: top;
+				text-align: center;
+				float: left;
+				padding: 3px;
+				color: #ddd;
+			}
+			
+			.msg-item .msg-user-img{
+				width: 38px;
+				height: 38px;
+				display: inline-block;
+				border-radius: 3px;
+				vertical-align: top;
+				text-align: center;
+				float: left;
+				color: #ddd;
+			}
+			
+			.msg-item .msg-content {
+				display: inline-block;
+				border-radius: 5px;
+				border: solid 1px #d3d3d3;
+				background-color: #FFFFFF;
+				color: #333;
+				padding: 8px;
+				vertical-align: top;
+				font-size: 15px;
+				position: relative;
+				margin: 0px 8px;
+				max-width: 75%;
+				min-width: 35px;
+				float: left;
+			}
+			.msg-item .msg-content .msg-content-inner {
+				overflow-x: hidden;
+			}
+			.msg-item .msg-content .msg-content-arrow {
+				position: absolute;
+				border: solid 1px #d3d3d3;
+				border-right: none;
+				border-top: none;
+				background-color: #FFFFFF;
+				width: 10px;
+				height: 10px;
+				left: -5px;
+				top: 12px;
+				-webkit-transform: rotateZ(45deg);
+				transform: rotateZ(45deg);
+			}
+			.msg-item-self .msg-user,
+			.msg-item-self .msg-content {
+				float: right;
+			}
+			.msg-item-self .msg-content .msg-content-arrow {
+				left: auto;
+				right: -5px;
+				-webkit-transform: rotateZ(225deg);
+				transform: rotateZ(225deg);
+			}
+			.msg-item-self .msg-content,
+			.msg-item-self .msg-content .msg-content-arrow {
+				background-color: #4CD964;
+				color: #fff;
+				border-color: #2AC845;
+			}
+			footer .mui-icon {
+				color: #000;
+			}
+			footer .mui-icon:active {
+				color: #007AFF !important;
+			}
+			footer .mui-icon-paperplane:before {
+				content: "发送";
+			}
+			footer .mui-icon-paperplane {
+				/*-webkit-transform: rotateZ(45deg);
+				transform: rotateZ(45deg);*/
+				
+				font-size: 16px;
+				word-break: keep-all;
+				line-height: 100%;
+				padding-top: 6px;
+				color: rgba(0, 135, 250, 1);
+			}
+			#msg-sound {
+				-webkit-user-select: none !important;
+				user-select: none !important;
+			}
+			.rprogress {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 140px;
+				height: 140px;
+				margin-left: -70px;
+				margin-top: -70px;
+				background-image: url(../images/arecord.png);
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-size: 30px 30px;
+				background-color: rgba(0, 0, 0, 0.7);
+				border-radius: 5px;
+				display: none;
+				-webkit-transition: .15s;
+			}
+			.rschedule {
+				background-color: rgba(0, 0, 0, 0);
+				border: 5px solid rgba(0, 183, 229, 0.9);
+				opacity: .9;
+				border-left: 5px solid rgba(0, 0, 0, 0);
+				border-right: 5px solid rgba(0, 0, 0, 0);
+				border-radius: 50px;
+				box-shadow: 0 0 15px #2187e7;
+				width: 46px;
+				height: 46px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -23px;
+				margin-top: -23px;
+				-webkit-animation: spin 1s infinite linear;
+				animation: spin 1s infinite linear;
+			}
+			.r-sigh{
+				display: none;
+				border-radius: 50px;
+				box-shadow: 0 0 15px #2187e7;
+				width: 46px;
+				height: 46px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -23px;
+				margin-top: -23px;
+				text-align: center;
+				line-height: 46px;
+				font-size: 40px;
+				font-weight: bold;
+				color: #2187e7;
+			}
+			.rprogress-sigh{
+				background-image: none !important;
+			}
+			.rprogress-sigh .rschedule{
+				display: none !important;
+			}
+			.rprogress-sigh .r-sigh{
+				display: block !important;
+			}
+			.rsalert {
+				font-size: 12px;
+				color: #bbb;
+				text-align: center;
+				position: absolute;
+				border-radius: 5px;
+				width: 130px;
+				margin: 5px 5px;
+				padding: 5px;
+				left: 0px;
+				bottom: 0px;
+			}
+			@-webkit-keyframes spin {
+				0% {
+					-webkit-transform: rotate(0deg);
+				}
+				100% {
+					-webkit-transform: rotate(360deg);
+				}
+			}
+			@keyframes spin {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			#h {
+				background: #fff;
+				border: solid 1px #ddd;
+				padding: 10px !important;
+				font-size: 16px !important;
+				font-family: verdana !important;
+				line-height: 18px !important;
+				overflow: visible;
+				position: absolute;
+				left: -1000px;
+				right: 0px;
+				word-break: break-all;
+				word-wrap: break-word;
+			}
+			.cancel {
+				background-color: darkred;
+			}
+			.chat-history-date{ 
+			    display: block;
+			    padding-top: 5px;
+			    text-align: center;
+			    font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body contextmenu="return false;">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="name"></h1>
+		</header>
+		<pre id='h'></pre>
+		<script id='msg-template' type="text/template">
+			<!--消息最后历史时间-->
+			<% for(var i in record){ var item=record[i]; %>
+					<% if(item.sender=='self' && item.createDate != '') { %>
+						<p class="chat-history-date"><%= (item.createDate) %></p>
+					<% } else if(item.sender !='self' && item.createDate != '') { %>
+						<p class="chat-history-date"><%= (item.createDate) %></p>
+					<% } %>
+				<div class="msg-item <%= (item.sender=='self'?' msg-item-self':'') %>" id="<%=(item.yyid)%>" msg-type='<%=(item.type)%>' msg-content='<%=(item.content)%>'>
+					<% if(item.sender=='self' ) { %>
+						<i class="msg-user mui-icon mui-icon-person"></i>
+					<% } else { %>
+						<img class="msg-user-img" src="../../images/chat/tx1.jpg" alt="" />
+					<% } %>
+					<div class="msg-content">
+						<div class="msg-content-inner">
+							<% if(item.type=='text' ) { %>
+								<%=( item.content|| '&nbsp;&nbsp;') %>
+							<% } else if(item.type=='image' ) { %>
+								<img class="msg-content-image" id="<%=(item.tpid)%>" src="<%=(item.content)%>" style="max-width: 100px;" />
+							<% } else if(item.type=='sound' ) { %>
+								<span class="mui-icon mui-icon-mic" style="font-size: 18px;font-weight: bold;"></span>
+								<span class="play-state">点击播放</span>
+							<% } %>
+						</div>
+						<div class="msg-content-arrow"></div>
+					</div>
+					<div class="mui-item-clear"></div>
+				</div>
+			<% } %>
+		</script>
+		<div class="mui-content">
+			<div id='msg-list'>
+			</div>
+		</div>
+		<footer>
+			<div class="footer-left">
+				<i id='msg-image' class="mui-icon mui-icon-camera" style="font-size: 28px;"></i>
+			</div>
+			<div class="footer-center">
+				<textarea id='msg-text' type="text" class='input-text'></textarea>
+				<button id='msg-sound' type="button" class='input-sound' style="display: none;">按住说话</button>
+			</div>
+			<label for="" class="footer-right">
+				<i id='msg-type' class="mui-icon mui-icon-mic"></i>
+			</label>
+		</footer>
+		<div id='sound-alert' class="rprogress">
+			<div class="rschedule"></div>
+			<div class="r-sigh">!</div>
+			<div id="audio_tips" class="rsalert">手指上滑，取消发送</div>
+		</div>
+		<script src="../../js/mui/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/mui/mui.imageViewer.js"></script>
+		<script src="../../js/mui/arttmpl.js"></script>
+		<script src="../../js/hygl/chat.js"></script>
+		<script src="../../js/hygl/chat-date.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			(function($, doc) {
+				var MIN_SOUND_TIME = 800;
+				$.init({
+					gestureConfig: {
+						tap: true, //默认为true
+						doubletap: true, //默认为false
+						longtap: true, //默认为false
+						swipe: true, //默认为true
+						drag: true, //默认为true
+						hold: true, //默认为false，不监听
+						release: true //默认为false，不监听
+					},
+					beforeback: function() {
+				　　　　 	//获得父页面的webview
+				      	var list = plus.webview.currentWebview().opener();
+				　　　　 	//触发父页面的自定义事件(refresh),从而进行刷新
+						mui.fire(list, 'contact_refresh');
+						//返回true,继续页面关闭逻辑
+						return true;
+				    }
+				});
+				// 关闭默认转义
+				template.config('escape', false);
+				//$.plusReady=function(fn){fn();};
+				$.plusReady(function() {
+					//********************展示图片及语音方法***********************
+					/*<img>设置文件路径
+					 *1.从本地获取,如果本地存在,则直接设置文件路径
+					 *2.如果本地不存在则联网下载,缓存到本地,再设置文件路径
+					 * */
+					function setFile(contenttype, len, fileId, filename, loadUrl) {
+						if(fileId == null || loadUrl == null) return;
+						//文件下载成功 默认保存在本地相对路径的"_downloads"文件夹里面, 如"_downloads/logo.jpg"
+						var relativePath = "_downloads/" + filename;
+						//检查文件是否已存在
+						plus.io.resolveLocalFileSystemURL(relativePath, function(entry) {
+							console.log("文件存在,直接设置=" + relativePath);
+							//如果文件存在,则直接设置本地文件路径
+							setFileFromLocal(contenttype, len, fileId, relativePath);
+						}, function(e) {
+							console.log("文件不存在,联网下载=" + relativePath);
+							//如果文件不存在,联网下载图片
+							setFileFromNet(contenttype, len, fileId, loadUrl, relativePath);
+						});
+					}
+
+					/*给文件标签<img>或者语音标签设置本地路径
+					 * contenttype 文件类型
+					 * len
+					 * fileId 标签id
+					 * relativePath 本地相对路径 例如:"_downloads/logo.jpg"
+					 */
+					function setFileFromLocal(contenttype, len, fileId, relativePath) {
+						//本地相对路径("_downloads/logo.jpg")转成SD卡绝对路径("/storage/emulated/0/Android/data/io.dcloud.HBuilder/.HBuilder/downloads/logo.jpg");
+						var sd_path = plus.io.convertLocalFileSystemURL(relativePath);
+						if (contenttype == 'image') {
+							//给<img>设置图片
+							console.log("设置Img Src fileId:"+fileId+"::" + sd_path);
+							document.getElementById(fileId).setAttribute("src", sd_path);
+						} else if (contenttype == 'sound') {
+							//给语音标签设置路径
+							document.getElementById(fileId).setAttribute("msg-content", sd_path);
+						}
+						if (len != 0) {
+							record[len-1].content = sd_path;
+						} else {
+							record[len].content = sd_path;
+						}
+						
+					}
+			
+					/*联网下载文件,并设置给<img>或者语音标签*/
+					function setFileFromNet(contenttype, len, fileId, loadUrl, relativePath) {
+						if (contenttype == 'image') {
+							//先设置下载中的默认图片
+							document.getElementById(fileId).setAttribute("src", "../../images/chat/loading.gif");
+						}
+						//创建下载任务
+						var dtask = plus.downloader.createDownload(loadUrl, {}, function(d, status) {
+							if(status == 200) {
+								//下载成功
+								console.log("下载成功=" + relativePath);
+								setFileFromLocal(contenttype, len, fileId, d.filename);
+							} else {
+								//下载失败,需删除本地临时文件,否则下次进来时会检查到图片已存在
+								console.log("下载失败=" + status + "==" + relativePath);
+								//dtask.abort();//文档描述:取消下载,删除临时文件;(但经测试临时文件没有删除,故使用delFile()方法删除);
+								if(relativePath != null)
+									delFile(relativePath);
+							}
+						});
+						//启动下载任务
+						dtask.start();
+					}
+			
+					/*删除指定文件*/
+					function delFile(relativePath) {
+						plus.io.resolveLocalFileSystemURL(relativePath, function(entry) {
+							entry.remove(function(entry) {
+								console.log("文件删除成功==" + relativePath);
+							}, function(e) {
+								console.log("文件删除失败=" + relativePath);
+							});
+						});
+					}
+					
+					/**
+					 * 下载附件并展示
+					 * @param {Object} contenttype 消息类型
+					 * @param {Object} len 根据record[len-1]添加该消息content（本地Url）
+					 * @param {Object} biaoqid 页面展示标签的ID
+					 * @param {Object} id 消息表Id
+					 * @param {Object} fujLx 附件类型
+					 */
+					function getLoadFileSrc(contenttype, len, biaoqid, id, fujLx) {
+				    	mui.ajax({
+							type: "post",
+							url: app.config() + '/doQueryFile',
+							async: false,
+							data: {
+								id: id,
+            					fujLx: fujLx
+							},
+							dataType: "json",
+							timeout: 10000,//超时时间设置为10秒；
+							success: function(data) {
+								if(data != null) {
+									setFile(contenttype, len, biaoqid, data[0].wenjm, app.config() + '/downloadFile?fujId=' + data[0].fujId);
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								//异常处理；
+								console.log(type);
+							}
+						});
+					}
+					//*************************展示图片方法结束**************************
+					//存放图片或语音
+					var feedback = {};
+					feedback.files = [];
+					feedback.addFile = function(path) {
+						var index = 0;
+						var name = "file" + index;
+						feedback.files.push({
+							name: name,
+							path: path
+						});
+					};
+					
+					// 获取聊天用户
+					var self = plus.webview.currentWebview();
+	            	var receiveid = self.userid;
+	            	var receiveUserName = self.receiveUserName;
+	            	var tip = self.tip;
+	            	if(tip != '') {
+	            		document.getElementById("msg-text").innerText = tip;
+	            	}
+					document.getElementById("name").innerText=receiveUserName;
+					// 存放聊天记录
+					var record = [];
+					// 获取聊天历史记录
+					mui.ajax({
+						type: "post",
+						url: app.config() + '/queryHistoryMessage',
+						async: false,
+						data: {
+							SENDUSERID: app.getState().user_id,
+							RECEIVEUSERID: receiveid
+						},
+						dataType: "json",
+						timeout: 10000,//超时时间设置为10秒；
+						success: function(data) {
+							if(data != null) {
+								if(data.historyInfo != null && data.historyInfo.length != 0) {
+									data.historyInfo.forEach(function(item) {
+										// 内容
+										var msg = '';
+										if (item.CONTENTTYPE == 'text') {
+											msg = item.CONTENT.replace(/\\u/g, '\%u');
+											msg = unescape(msg);
+										} else {
+											msg = item.CONTENT
+										}
+										// 判断发送信息者是否为登录人
+										if (item.SENDUSERID == app.getState().user_id) {
+											record.push({
+												sender: 'self',
+												type: item.CONTENTTYPE,
+												content: msg,
+												createDate:item.formateCreateDate,
+												hiddenDate:item.CREATEDATE,
+												tpid:'tp'+ item.ID, //图片标签id
+												yyid:'yy'+ item.ID  //语音标签id
+											});
+										} else {
+											record.push({
+												sender: item.RECEIVEUSERID,
+												type: item.CONTENTTYPE,
+												content: msg,
+												createDate:item.formateCreateDate,
+												hiddenDate:item.CREATEDATE,
+												tpid:'tp'+ item.ID,
+												yyid:'yy'+ item.ID
+											});
+										}
+
+										// 显示图片并存入记录中
+										if (item.CONTENTTYPE == 'image') {
+											getLoadFileSrc(item.CONTENTTYPE, record.length, 'tp'+ item.ID, item.ID, "消息互动图片");
+										} else if (item.CONTENTTYPE == 'sound') {
+											getLoadFileSrc(item.CONTENTTYPE, record.length, 'yy'+ item.ID, item.ID, "消息互动语音");
+										}
+							    	});
+								}
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							console.log(type);
+						}
+					});
+					
+					//避免重复连接
+					var lockReconnect = false;
+					//websocket地址
+				    var wsUrl = app.websocketConfig();
+				    var websocket = null;
+				    var tt;
+				   
+				    function createWebSocket() {
+				    	//判断当前浏览器是否支持WebSocket
+					    if ('WebSocket' in window) {
+					    	try {
+								websocket = new WebSocket(wsUrl);
+							    init();
+							} catch(e) {
+							    console.log('catch');
+							    reconnect(wsUrl);
+							}
+					    } else {
+					        mui.alert('当前浏览器不支持不支持websocket协议！')
+						}
+						
+					}
+	
+					function init() {
+						
+						// 监听Socket的关闭 
+						websocket.onclose = function() {
+							console.log('Socket连接关闭', event);  
+							reconnect(wsUrl);
+						};
+						
+						// 监听Socket错误
+						websocket.onerror = function() {
+							console.log("Socket连接失败");
+							reconnect(wsUrl);
+						};
+						
+						// 打开Socket
+						websocket.onopen = function() {
+							console.log("连接成功");
+							//心跳检测重置
+							heartCheck.start();
+						};
+						
+						websocket.onmessage = function(event) {
+							//心跳检测重置
+							heartCheck.start();
+							//拿到任何消息都说明当前连接是正常的
+							console.log('接收到消息' + event.data);
+							// 获取服务端发送消息，确定是否为第一次连接
+							if (event.data == app.getState().user_id) {
+								// 第一次连接向服务器发送该聊天窗口信息，判断是已读还是未读
+								var data = {};
+					            data['CONTENTTYPE'] = 'view';
+					            data['SENDUSERID'] = app.getState().user_id;
+					            websocket.send(JSON.stringify(data));
+							} else {
+								if (event.data!='ping') {
+									var data=JSON.parse(event.data);
+									var msg = '';
+									if (data.CONTENTTYPE == 'text') {
+										msg = data.CONTENT.replace(/\\u/g, '\%u');
+										msg = unescape(msg);
+									} else {
+										msg = data.CONTENT
+									}
+									record.push({
+										sender: data.RECEIVEUSERID,
+										type: data.CONTENTTYPE,
+										content: msg,
+										createDate:data.formateCreateDate,
+										hiddenDate:data.CREATEDATE,
+										tpid:'tp'+ data.ID,
+										yyid:'yy'+ data.ID
+									});
+									// 显示图片并存入记录中
+									if (data.CONTENTTYPE == 'image') {
+										getLoadFileSrc(data.CONTENTTYPE, record.length, 'tp'+ data.ID, data.ID, "消息互动图片");
+									} else if (data.CONTENTTYPE == 'sound') {
+										getLoadFileSrc(data.CONTENTTYPE, record.length, 'yy'+ data.ID, data.ID, "消息互动语音");
+									}
+									bindMsgList();
+								}
+							}
+						}
+					}
+	
+					/**
+					 * 如果网络断开的话，会执行reconnect方法，
+					 * 使用了一个定时器，1秒后会重新创建一个新的websocket链接，
+					 * 重新调用createWebSocket函数
+					 * @param {Object} url
+					 */
+					function reconnect(url) {
+						if(lockReconnect) {
+							return;
+						};
+						lockReconnect = true;//没连接上会一直重连，设置延迟避免请求过多
+				      	tt && clearTimeout(tt);
+				    	tt = setTimeout(function () {
+					        createWebSocket(url);
+					        lockReconnect = false;
+				      	}, 1000);
+				    }
+				    //心跳检测
+				    var heartCheck = {
+					    timeout: 540000,//9分钟
+					    timeoutObj: null,
+					    serverTimeoutObj: null,
+					    start: function(){
+				        	console.log('心跳检测start');
+				        	var self = this;
+					        this.timeoutObj && clearTimeout(this.timeoutObj);
+					        this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
+					        this.timeoutObj = setTimeout(function(){
+				        		//这里发送一个心跳，后端收到后，返回一个心跳消息
+				        		//onmessage拿到返回的心跳就说明连接正常
+				        		var data = {};
+					            data['CONTENTTYPE'] = 'ping';
+					            websocket.send(JSON.stringify(data));
+				        		self.serverTimeoutObj = setTimeout(function() {
+				        			//如果超过一定时间还没重置，说明后端主动断开了
+						            websocket.close();//如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+				          		}, self.timeout);
+				        	}, this.timeout)
+				    	}
+				    };
+					
+					createWebSocket(wsUrl);
+					
+					plus.webview.currentWebview().setStyle({
+						//webview根据键盘弹出自动调整高度
+						softinputMode: "adjustResize"
+					});
+					
+					//获取焦点并调用软键盘
+					var showKeyboard = function() {
+						if ($.os.ios) {
+							var webView = plus.webview.currentWebview().nativeInstanceObject();
+							webView.plusCallMethod({
+								"setKeyboardDisplayRequiresUserAction": false
+							});
+						} else {
+							var Context = plus.android.importClass("android.content.Context");
+							var InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
+							var main = plus.android.runtimeMainActivity();
+							var imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+							imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+							//var view = ((ViewGroup)main.findViewById(android.R.id.content)).getChildAt(0);
+							imm.showSoftInput(main.getWindow().getDecorView(), InputMethodManager.SHOW_IMPLICIT);
+							//alert("ll");
+						}
+					};
+				
+					var ui = {
+						body: doc.querySelector('body'),
+						footer: doc.querySelector('footer'),
+						footerRight: doc.querySelector('.footer-right'),
+						footerLeft: doc.querySelector('.footer-left'),
+						btnMsgType: doc.querySelector('#msg-type'),
+						boxMsgText: doc.querySelector('#msg-text'),
+						boxMsgSound: doc.querySelector('#msg-sound'),
+						btnMsgImage: doc.querySelector('#msg-image'),
+						areaMsgList: doc.querySelector('#msg-list'),
+						boxSoundAlert: doc.querySelector('#sound-alert'),
+						h: doc.querySelector('#h'),
+						content: doc.querySelector('.mui-content')
+					};
+					ui.h.style.width = ui.boxMsgText.offsetWidth + 'px';
+					//alert(ui.boxMsgText.offsetWidth );
+					var footerPadding = ui.footer.offsetHeight - ui.boxMsgText.offsetHeight;
+					//处理语音消息播放方法
+					var msgItemTap = function(msgItem, event) {
+						var msgType = msgItem.getAttribute('msg-type');
+						//  音频地址：_doc/audio/1541750054076.amr
+						var msgContent = msgItem.getAttribute('msg-content')
+						if (msgType == 'sound') {
+							player = plus.audio.createPlayer(msgContent);
+							var playState = msgItem.querySelector('.play-state');
+							playState.innerText = '正在播放...';
+							player.play(function() {
+								playState.innerText = '点击播放';
+							}, function(e) {
+								playState.innerText = '点击播放';
+							});
+						}
+					};
+					 //图片预览组件
+					var imageViewer = new $.ImageViewer('.msg-content-image', {
+						dbl: false
+					});
+					//绑定消息节点
+					var bindMsgList = function() {
+						//绑定数据:
+						/*tp.bind({
+							template: 'msg-template',
+							element: 'msg-list',
+							model: record
+						});*/
+						 //将数据绑定到界面上
+						ui.areaMsgList.innerHTML = template('msg-template', {
+							"record": record
+						});
+						//拿到所有的聊天节点
+						var msgItems = ui.areaMsgList.querySelectorAll('.msg-item');
+						//因为document.querySelectorAll()返回的并不是我们想当然的数组，而是NodeList，对NodeList，它里面没有.forEach方法，我们使用了这样的方法进行循环：
+        				//通过call将this绑定到msgItems（以[]下标的方式去遍历msgItems）
+						[].forEach.call(msgItems, function(item, index) {
+							item.addEventListener('tap', function(event) {
+								//处理语音消息播放
+								msgItemTap(item, event);
+							}, false);
+						});
+						//查找所有符合条件的图片
+						imageViewer.findAllImage();
+						//聊天界面的高度修改
+						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
+					};
+					bindMsgList();
+					//平滑高度过渡
+					window.addEventListener('resize', function() {
+						ui.areaMsgList.scrollTop = ui.areaMsgList.scrollHeight + ui.areaMsgList.offsetHeight;
+					}, false);
+					//发送对象声明
+					var send = function(msg) {
+						var after = msg.hiddenDate;
+						if (record.length != 0) {
+							// 查询记录里最后一天记录日期
+							var before = record[record.length-1].hiddenDate;
+							// 查询两个日期直接相差的分钟
+							var min = getMinByTwoDate(before,after);
+							if (min >= 5) {
+								// 格式化日期格式
+								var dateText = getdate(after);
+								msg.createDate = dateText;
+							}
+						} else {
+							var dateText = getdate(after);
+							msg.createDate = dateText;
+						}
+						//将消息内容体push进record
+						record.push(msg);
+						 //绑定消息节点
+						bindMsgList();
+						to_receiveUser(msg, receiveid);
+					};
+					// 发送消息方法
+					var to_receiveUser = function(info, receiveid) {
+//						var sendUrl = 'http://www.tuling123.com/openapi/api';
+//						$.getJSON(sendUrl, {
+//							"key": 'acfbca724ea1b5db96d2eef88ce677dc',
+//							"info": info,
+//							"userid": plus.device.uuid
+//						}, function(data) {
+//							//alert(JSON.stringify(data));
+//							record.push({
+//								sender: 'zs',
+//								type: 'text',
+//								content: data.text
+//							});
+//							bindMsgList();
+//						});
+						
+						if (websocket != null) {
+							var data = {};//新建data对象，并规定属性名与相应的值
+				            data['SENDUSERID'] = app.getState().user_id;
+				            data['RECEIVEUSERID'] = receiveid;
+				            data['CONTENTTYPE'] = info.type;
+				            if (info.type == 'text') {
+				            	var msg = escape(info.content);
+								msg = msg.replace(/\%u/g, '\\u');
+				            	data['CONTENT'] = msg;
+				            } else {
+				            	data['CONTENT'] = info.content;
+				            }
+				            // 判断是否为文本消息，不为文本则先上传文件并插入消息，上传成功则通过websocket发送消息
+				            if (info.type != 'text') {
+				            	// 不为文本则先上传图片,发送图片成功后在发送信息
+								feedback.send(mui.extend({}, {
+									SENDUSERID: app.getState().user_id,
+									RECEIVEUSERID: receiveid,
+									CONTENTTYPE: info.type,
+									FILES: feedback.files,
+									SENDDATA: data // 需要发送的信息
+								}))
+							} else {
+								// 为文本则直接发送消息
+								document.getElementById("msg-text").innerText = '';
+								websocket.send(JSON.stringify(data));//将对象封装成JSON后发送至服务器
+							}
+			            } else {  
+			                mui.alert('连接无法建立, 请重新连接..');  
+			            }  
+					};
+					
+					// 上传图片方法（不通过webSocket发送）
+					feedback.send = function(content) {
+						var type = content.CONTENTTYPE;
+						feedback.uploader = plus.uploader.createUpload(app.config() + '/uploadFile', {
+							method: 'POST',
+							blocksize: 204800,
+							priority: 100
+						}, function(upload, status) {
+							plus.nativeUI.closeWaiting();
+							// if(status == 200) {
+							// 	var data = JSON.parse(upload.responseText);
+							// 	if(data.msg != "failed") {
+							// 		//上传成功后向对方发送消息
+							// 		mui.each(content, function(index, element) {
+							// 			if(index == 'SENDDATA') {
+							// 				element['ID'] = data.id;
+							// 				websocket.send(JSON.stringify(element));//将对象封装成JSON后发送至服务器
+							// 			}
+							// 		});
+							// 		// 重置文件
+							// 		feedback.files = [];
+							// 	} else {
+							// 		//上传失败
+							// 		if (type == 'image') {
+							// 			mui.alert('图片发送失败！请重新再试!');
+							// 		} else if (type == 'sound') {
+							// 			mui.alert('语音发送失败！请重新再试!');
+							// 		}
+							// 		// 重置文件
+							// 		feedback.files = [];
+							// 	}
+							// } else {
+							// 	if (type == 'image') {
+							// 		mui.alert("图片发送错误！");
+							// 	} else if (type == 'sound') {
+							// 		mui.alert("语音发送错误！");
+							// 	}
+							// 	// 重置文件
+							// 	feedback.files = [];
+							// }
+			
+						});
+						//添加上传数据
+						mui.each(content, function(index, element) {
+							if(index != 'FILES' && index != 'SENDDATA') {
+								feedback.uploader.addData(index, element);
+							}
+						});
+						//添加上传文件
+						mui.each(feedback.files, function(index, element) {
+							var f = feedback.files[index];
+							feedback.uploader.addFile(f.path, {
+								key: f.name
+							});
+						});
+						//开始上传任务
+						feedback.uploader.start();
+						plus.nativeUI.showWaiting();
+					};
+
+					//让输入框获取焦点
+					function msgTextFocus() {
+						ui.boxMsgText.focus();
+						setTimeout(function() {
+							ui.boxMsgText.focus();
+						}, 150);
+					}
+					//解决长按“发送”按钮，导致键盘关闭的问题；
+					ui.footerRight.addEventListener('touchstart', function(event) {
+						if (ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
+							msgTextFocus();
+							event.preventDefault();
+						}
+					});
+					//解决长按“发送”按钮，导致键盘关闭的问题；
+					ui.footerRight.addEventListener('touchmove', function(event) {
+						if (ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
+							msgTextFocus();
+							event.preventDefault();
+						}
+					});
+					//					ui.footerRight.addEventListener('touchcancel', function(event) {
+					//						if (ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
+					//							msgTextFocus();
+					//							event.preventDefault();
+					//						}
+					//					});
+					//					ui.footerRight.addEventListener('touchend', function(event) {
+					//						if (ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
+					//							msgTextFocus();
+					//							event.preventDefault();
+					//						}
+					//	});
+					 //长按离开屏幕时触发
+					ui.footerRight.addEventListener('release', function(event) {
+						 //当是文字时
+						if (ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
+							//showKeyboard();
+							ui.boxMsgText.focus();
+							setTimeout(function() {
+								ui.boxMsgText.focus();
+							}, 150);
+							//							event.detail.gesture.preventDefault();
+							send({
+								sender: 'self',
+								type: 'text',
+								content: ui.boxMsgText.value.replace(new RegExp('\n', 'gm'), '<br/>'),
+								CREATEDATE:'',
+								hiddenDate:new Date()
+							});
+							ui.boxMsgText.value = '';
+							$.trigger(ui.boxMsgText, 'input', null);
+						} 
+						 //当是语音时
+						else if (ui.btnMsgType.classList.contains('mui-icon-mic')) {
+							ui.btnMsgType.classList.add('mui-icon-compose');
+							ui.btnMsgType.classList.remove('mui-icon-mic');
+							ui.boxMsgText.style.display = 'none';
+							ui.boxMsgSound.style.display = 'block';
+							ui.boxMsgText.blur();
+							document.body.focus();
+						} 
+						//当是文本状态时
+						else if (ui.btnMsgType.classList.contains('mui-icon-compose')) {
+							ui.btnMsgType.classList.add('mui-icon-mic');
+							ui.btnMsgType.classList.remove('mui-icon-compose');
+							ui.boxMsgSound.style.display = 'none';
+							ui.boxMsgText.style.display = 'block';
+							//--
+							//showKeyboard();
+							ui.boxMsgText.focus();
+							setTimeout(function() {
+								ui.boxMsgText.focus();
+							}, 150);
+						}
+					}, false);
+					//点击左边按钮时
+					ui.footerLeft.addEventListener('tap', function(event) {
+						var btnArray = [{
+							title: "拍照"
+						}, {
+							title: "从相册选择"
+						}];
+						plus.nativeUI.actionSheet({
+							title: "选择照片",
+							cancel: "取消",
+							buttons: btnArray
+						}, function(e) {
+							var index = e.index;
+							switch (index) {
+								case 0:
+									break;
+								case 1:
+									// 获取摄像头管理对象
+									var cmr = plus.camera.getCamera();
+									// 调用拍照功能
+									cmr.captureImage(function(path) {
+										var url = "file://" + plus.io.convertLocalFileSystemURL(path);
+										feedback.addFile(url);
+								        send({
+											sender: 'self',
+											type: 'image',
+											content: url,
+											CREATEDATE:'',
+											hiddenDate:new Date(),
+											tpid:'',
+											yyid:''
+										});
+									}, function(err) {});
+									break;
+								case 2:
+									plus.gallery.pick(function(path) {
+										// 获取文件名称及后缀
+										var name = path.substr(path.lastIndexOf('/') + 1);
+										plus.zip.compressImage({
+											src:path,
+											dst:'_doc/' + name,
+											overwrite: true, //覆盖生成新文件
+											quality: 50 // 压缩图片的质量
+										},
+										function(zip) {
+											feedback.addFile(zip.target);
+											send({
+												sender: 'self',
+												type: 'image',
+												content: zip.target,
+												CREATEDATE:'',
+												hiddenDate:new Date(),
+												tpid:'',
+												yyid:''
+											});
+										},function(error) {
+										});
+									}, function(err) {}, {filter:"image"});
+									break;
+							}
+						});
+					}, false); 
+					 //控制按住语音时的显示与隐藏
+					var setSoundAlertVisable=function(show){
+						if(show){
+							ui.boxSoundAlert.style.display = 'block';
+							ui.boxSoundAlert.style.opacity = 1;
+						}else{
+							ui.boxSoundAlert.style.opacity = 0;
+							//fadeOut 完成再真正隐藏
+							setTimeout(function(){
+								ui.boxSoundAlert.style.display = 'none';
+							},200);
+						}
+					};
+					var recordCancel = false;
+					var recorder = null;
+					var audio_tips = document.getElementById("audio_tips");
+					var startTimestamp = null;
+					var stopTimestamp = null;
+					var stopTimer = null;
+					//按住说话时候触发
+					ui.boxMsgSound.addEventListener('hold', function(event) {
+						recordCancel = false;
+						 //如果有结束时间，清除定时器
+						if(stopTimer)clearTimeout(stopTimer);
+						//修改显示文字
+						audio_tips.innerHTML = "手指上划，取消发送";
+						//移除rprogress-sigh
+						ui.boxSoundAlert.classList.remove('rprogress-sigh');
+						//显示样式
+						setSoundAlertVisable(true);
+						//获取录音对象  5+模块
+						recorder = plus.audio.getRecorder();
+						if (recorder == null) {
+							plus.nativeUI.toast("不能获取录音对象");
+							return;
+						}
+						//记录当前录音时间
+						startTimestamp = (new Date()).getTime();
+						//保存录音http://www.html5plus.org/doc/zh_cn/audio.html#plus.audio.RecordOption
+						recorder.record({
+							filename: "_doc/audio/"
+						}, function(path) {
+							if (recordCancel) return;
+							// 添加需要上传的语音文件
+							feedback.addFile(path);
+							// 发送语音消息
+							send({
+								sender: 'self',
+								type: 'sound',
+								content: path,
+								CREATEDATE:'',
+								hiddenDate:new Date(),
+								tpid:'',
+								yyid:''
+							});
+						}, function(e) {
+							plus.nativeUI.toast("录音时出现异常: " + e.message);
+						});
+					}, false);
+					 //监听drag（拖动中）事件 上滑;下滑事件
+					ui.body.addEventListener('drag', function(event) {
+						//console.log('drag');
+						if (Math.abs(event.detail.deltaY) > 50) {
+							//此时没有录音操作执行 检查recordCancel状态
+							if (!recordCancel) {
+								recordCancel = true;
+								if (!audio_tips.classList.contains("cancel")) {
+									audio_tips.classList.add("cancel");
+								}
+								audio_tips.innerHTML = "松开手指，取消发送";
+							}
+						} else {
+							if (recordCancel) {
+								recordCancel = false;
+								if (audio_tips.classList.contains("cancel")) {
+									audio_tips.classList.remove("cancel");
+								}
+								audio_tips.innerHTML = "手指上划，取消发送";
+							}
+						}
+					}, false);
+					 //长按离开录音节点时执行
+					ui.boxMsgSound.addEventListener('release', function(event) {
+						//console.log('release');
+						//初始化
+						if (audio_tips.classList.contains("cancel")) {
+							audio_tips.classList.remove("cancel");
+							audio_tips.innerHTML = "手指上划，取消发送";
+						}
+						 //判断录音是否小于800毫秒，若小于，则废弃
+						stopTimestamp = (new Date()).getTime();
+						if (stopTimestamp - startTimestamp < MIN_SOUND_TIME) {
+							audio_tips.innerHTML = "录音时间太短";
+							ui.boxSoundAlert.classList.add('rprogress-sigh');
+							recordCancel = true;
+							stopTimer=setTimeout(function(){
+								setSoundAlertVisable(false);
+							},800);
+						}else{
+							setSoundAlertVisable(false);
+						}
+						//停止录音模块
+						recorder.stop();
+					}, false);
+					//阻止浏览器默认的事件冒泡
+					ui.boxMsgSound.addEventListener("touchstart", function(e) {
+						//console.log("start....");
+						e.preventDefault();
+					});
+					//监听用户输入时触发
+					ui.boxMsgText.addEventListener('input', function(event) {
+						//当输入为空时去掉发送文字，当不为空时，显示发送文字
+						ui.btnMsgType.classList[ui.boxMsgText.value == '' ? 'remove' : 'add']('mui-icon-paperplane');
+						//当用户输入值不为空时，设置自定义属性for 赋值msg-text
+						ui.btnMsgType.setAttribute("for", ui.boxMsgText.value == '' ? '' : 'msg-text');
+						//替换与正则表达式相匹配的值(转义)
+						ui.h.innerText = ui.boxMsgText.value.replace(new RegExp('\n', 'gm'), '\n-') || '-';
+						//动态调整输入框高度
+						ui.footer.style.height = (ui.h.offsetHeight + footerPadding) + 'px';
+						//调整显示信息高度
+						ui.content.style.paddingBottom = ui.footer.style.height;
+					});
+					var focus = false;
+					//监听用户点击发送时触发
+					ui.boxMsgText.addEventListener('tap', function(event) {
+						//得到焦点
+						ui.boxMsgText.focus();
+						setTimeout(function() {
+							ui.boxMsgText.focus();
+						}, 0);
+						focus = true;
+						setTimeout(function () {
+							focus = false;
+						},1000);
+						//阻止iOS2.0中的手势事件：gesture事件 
+						event.detail.gesture.preventDefault();
+					}, false);
+					//点击消息列表，关闭键盘
+					ui.areaMsgList.addEventListener('click',function (event) {
+						if(!focus){
+							ui.boxMsgText.blur();
+						}
+					})
+					
+					// 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常
+					var old_back = $.back;
+					$.back = function(event){
+						websocket.close();
+						old_back();
+					}
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

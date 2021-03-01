@@ -1,0 +1,483 @@
+* {
+	-webkit-user-select: none;
+	-ms-touch-select: none;
+/*
+	-ms-touch-action: none;
+*/
+}
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	font-family: Microsoft YaHei;
+	font-size:16px;
+	color: #ABB6CC;
+	-webkit-touch-callout:none;
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-text-size-adjust:none;
+}
+header {
+	width: 100%;
+	height: 44px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-size: 20px;
+	text-align: center;
+	line-height: 44px;
+	background: #FFF;
+	z-index: 9999;
+	border-bottom: 1px solid rgba(204,204,204,0.8);
+	-ms-touch-action: none;
+}
+
+/******************通用************************/
+.font_white{
+	color:#FFFFFF;
+}
+.font_red{
+	color:#CF2D28;
+}
+.font_green{
+	color:#2AC845;
+}
+.font_black{
+	color:#000000;
+}
+.font_blue{
+	color:#0000FF;
+}
+.font_gray{
+	color:#DDDDDD;
+}
+
+.font_18{
+	font-size:18px;
+}
+
+.font_weight_bold{
+	font-weight:bold;
+}
+
+.textaligRight{
+	text-align:right;
+}
+.textaligLeft{
+	text-align:left;
+}
+.backgroudcolor_white{
+	background-color:#FFFFFF;
+}
+
+.mui-row_height {
+	height:3rem;
+	line-height:3rem;
+}
+
+.mui-table-view-cell{
+	padding:3px 15px;
+}
+
+.mui-row>[class*=mui-col-]{
+	text-align:right;
+}
+
+.title {
+	/*margin: 20px 15px 7px;
+	padding: 5px 15px 7px;*/
+	color: #0062cc;
+	font-size: 15px;
+	font-weight:bold;
+}
+
+.mui-table-view:after{
+	height:0px;
+}
+/*******************table列表******************/
+.table {
+    border: 1px solid #cad9ea;
+    color: #666;
+}
+.table th {
+    background-repeat: repeat-x;
+    height: 30px;
+}
+.table td,.table th {
+    border-bottom: 1px solid #cad9ea;
+    /*padding: 0 1em 0;*/
+}
+.table tr {
+	font-size: 1.2rem;
+	text-align:center;
+	height: 2rem;
+}
+.table tr:first-child {
+	font-size: 0.9rem;
+	text-align:center;
+	height: 2rem;
+}
+.table tr.alter {
+    background-color: #f5fafe;
+}
+table tr:nth-child(odd){background:#F4F4F4;}
+table th{background:#0090D7;color:#FFF;}
+
+.border_bottom {
+	border-bottom-style: solid;
+	border-bottom-width: 0.1rem;
+	border-bottom-color: grey;
+}
+.icon_co {
+  /* 通过设置 font-size 来改变图标大小 */
+  width: 1em; height: 1em;
+  /* 图标和文字相邻时，垂直对齐 */
+  vertical-align: -0.15em;
+  /* 通过设置 color 来改变 SVG 的颜色/fill */
+  fill: currentColor;
+  /* path 和 stroke 溢出 viewBox 部分在 IE 下会显示
+     normalize.css 中也包含这行 */
+  overflow: hidden;
+}
+/*******************登录页面******************/
+.login_bacgime {
+	width: 100%;
+    height: 100%;
+    background: url("../images/denglubg.png") no-repeat;
+    background-position:center;
+    background-size: cover;
+}
+/*******************首页**********************/
+.shouy_dangqsjBg {
+	width: 100%;
+    height: 100%;
+    background: url("../images/zhuyebg.png") no-repeat;
+    /*background-position:center;*/
+}
+/*******************地图图标******************/
+#tip1 img {
+	/*margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 3px;*/
+	width: 26px;
+	height: 26px;
+}
+
+#tip2 img {
+	/*margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 3px;*/
+	width: 26px;
+	height: 26px;
+}
+
+#tip3 img {
+	/*margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 3px;*/
+	width: 26px;
+	height: 26px;
+}
+
+#tip4 img {
+	/*margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 3px;*/
+	width: 26px;
+	height: 26px;
+}
+
+#tip5 img {
+	/*margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 3px;*/
+	width: 26px;
+	height: 26px;
+}
+
+/*******竖线*******/
+.shux{
+	display:inline-block;
+	opacity: 0.6;
+	background: #0786E7;
+	height:1rem;
+	width: 0.2rem;
+	margin-left:1rem;
+}
+.shux_lan{
+	display:inline-block;
+	opacity: 0.6;
+	background: #9bcef5;
+	height:0.7rem;
+	width: 0.2rem;
+	margin-left:1rem;
+}
+
+.riq{
+	float: left;
+	margin-left:2rem;
+}
+
+.muiCardMarginTop{
+	margin-top: 2vh !important;
+}
+.muiRowMarginTop{
+	margin-top: 1vh !important;
+}
+/******iconfont-彩色*********/
+.icon {
+   width: 1em; height: 1em;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+}
+/*******首页图标样式以及弹出框图标样式*******/
+.mui-grid-view.mui-grid-9{
+	background-color: #ffffff;
+}
+.mui-grid-view.mui-grid-9 .mui-table-view-cell{
+	padding:0px 0px;
+	border-right:0px solid #eee;
+	border-bottom:0px solid #eee;
+}
+.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
+	font-size:0.8rem;
+}
+.icon{
+	width:2rem;
+	height: 2rem;
+}
+.mui-popover{
+	display:block;
+	bottom: 0px;
+	width: 100%;
+}
+/******圆角及标题背景******/
+.borderRadius {
+	border-radius:0.8rem;
+}
+.borderRadius_shang {
+	border-radius:0.8rem 0.8rem 0rem 0rem;
+}
+.borderRadius_xia {
+	border-radius:0rem 0rem 0.8rem 0.8rem;
+}
+.borderRadius_youXia {
+	border-radius:0rem 0rem 0.8rem 0rem;
+}
+.borderRadius_zuoXia {
+	border-radius:0rem 0rem 0rem 0.8rem;
+}
+
+.titleBackColor_lv{
+	background-color: #008000;
+}
+.titleBackColor__gray{
+	background-color:#DDDDDD;
+}
+
+/******echarts样式开始******/
+.chart_shuz {
+	height: 23vw;
+	width: 100%;
+}
+
+.chart {
+	height: 40vw;
+	width: 100%;
+}
+
+.titleView{
+	text-align: left !important;
+	border-right:2px solid #f0f0f0;
+}
+
+.titleViewDate{
+	text-align: left !important;
+	margin-left: 7vw;
+}
+
+.tableViewBorder{
+	border-right:1px solid #f0f0f0;
+}
+.tableViewBorderLeft{
+	border-left:1px solid #f0f0f0;
+}
+.tableViewBorderTop{
+	border-top:1px solid #f0f0f0
+}
+
+/******echarts结束******/
+
+.guanltxValue{
+	color: #0786E7;
+}
+
+.anqjgTableTitle{
+	height: 15vw;
+	line-height: 15vw;
+	/*border-right:2px solid #f0f0f0;*/
+	
+}
+
+//日期换行
+.labelDown{
+	display: block;
+}
+
+
+#yxdt_luwsj_dialog {
+	border-radius: 10px;
+	position: fixed;
+	width: 300px;
+	height: 340px;
+	top: 20%;
+	left: 10%;
+	visibility: hidden;
+	background-color: white;
+	z-index: 100;
+}
+
+#gaosglgczllListDiv {
+	border-radius: 10px;
+    position: fixed;
+    width: 90%;
+    height: 85%;
+    top: 10%;
+    left: 5%;
+    visibility: hidden;
+    background-color: white;
+    z-index: 100;
+}
+
+#putglgczllListDiv {
+	border-radius: 10px;
+    position: fixed;
+    width: 90%;
+    height: 85%;
+    top: 10%;
+    left: 5%;
+    visibility: hidden;
+    background-color: white;
+    z-index: 100;
+}
+
+#weihpdlysqyListDiv {
+	border-radius: 10px;
+    position: fixed;
+    width: 90%;
+    height: 85%;
+    top: 10%;
+    left: 5%;
+    visibility: hidden;
+    background-color: white;
+    z-index: 100;
+}
+
+/******input输入框开始******/
+
+.lurXx{
+	border-bottom: 1px solid #dbdbdb !important;  
+	border-top:0px !important; 
+	border-left:0px !important; 
+	border-right:0px !important; 
+	text-align: center;
+	color: #333;
+}
+
+/******input输入框结束******/
+
+/* 内容样式(tab内刷新固定高度) */
+.shuaxClass{
+    position:fixed;
+    top:2.5em;
+    bottom:0.01em;
+    width:100%;
+    overflow-y:auto;
+}
+/* 边框虚线 */
+.xuxian_red{ 
+	border:2px dashed #FF6A6A;
+}
+.xuxian_orange{ 
+	border:2px dashed #FFA500;
+}
+/* 跳动 */
+@-webkit-keyframes bounce-down {
+   25% {-webkit-transform: translateY(-10px);}
+   50%, 100% {-webkit-transform: translateY(0);}
+  75% {-webkit-transform: translateY(10px);}
+ }
+@keyframes bounce-down {
+  25% {transform: translateY(-10px);}
+  50%, 100% {transform: translateY(0);}
+  75% {transform: translateY(10px);}
+ }
+@-webkit-keyframes bounce-up {
+  25% {-webkit-transform: translateY(10px);}
+  50%, 100% {-webkit-transform: translateY(0);}
+  75% {-webkit-transform: translateY(-10px);}
+ }
+@keyframes bounce-up {
+  25% {transform: translateY(10px);}
+  50%, 100% {transform: translateY(0);}
+  75% {transform: translateY(-10px);}
+ }
+.animate-bounce-down{ 
+	-webkit-animation: bounce-down 1.5s linear infinite;
+	animation: bounce-down 1.5s linear infinite;
+ }
+.animate-bounce-up{ 
+	-webkit-animation: bounce-up 1.4s linear infinite;
+	animation: bounce-up 1.4s linear infinite;
+}
+
+/*******预告警提示弹出框**********/
+.mui-toast-message2{
+	font-size:14px;
+	width:270px;
+	margin:5px auto;
+	padding:5px;
+	text-align:center;
+	color:#fff;
+	border-radius:7px;
+	background-color:#333
+}
+
+.mui-toast-container2{
+	position:fixed;
+	z-index:9999;
+	top:50px;
+	width:100%;
+	transition:opacity .8s;
+}
+
+.mui-card{
+	margin: 0px;
+}
+
+.biaot{
+	font-weight: bold;
+	color: #007aff !important;
+	padding: .1em 0.5em;
+	border-left: 4px solid #007aff;
+}
+
+/*设置为蓝色*/
+.mui-bar{background-color:#4cb7d4}
+/*标题颜色为白色*/
+.mui-title{color:ffffff}
+
+.mui-bar a{
+	color: #ffffff;
+}
+.mui-title{
+	color: #ffffff;
+}
+.mui-bar .mui-btn-link{
+	color: #ffffff;
+}

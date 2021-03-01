@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>个性化首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css">
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css">
+		<style>
+			body {
+				color: gray;
+			}
+			
+			.headerHight{
+				height:7vw;
+				min-height: 7vw;
+			}
+			.colStyle{
+				padding:3vw;
+			}
+			.colStyleTb{
+				padding:1vw 5vw 1vw 1vw;
+			}
+			
+			.mui-search:before{
+				margin-top:-25px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个性化首页</h1>
+			<button type="button" id="chongz" class="mui-btn mui-btn-blue mui-pull-right mui-btn-link">重置</button>
+		</header>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div id="sncxLabel" class="mui-card" style="margin-top: 51px;">
+						<div class="mui-card-header headerHight">
+							<h5 class="biaot" style="1">市内出行</h5>
+							<label id="sncxLabel_" class="mui-h5" style="color: #f0ad4e;">编辑</label>
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-row" style="width:100%">
+						        <div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+									<h5 id="sncxLabel_1_name">路况</h5>
+						        </div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="sncxLabel_1_icon" xlink:href="#icon-shishilukuang"></use>
+									</svg>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+									<h5 id="sncxLabel_2_name">公共自行车</h5>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="sncxLabel_2_icon" xlink:href="#icon-zihangche"></use>
+									</svg>
+								</div>
+						    </div>
+							<div class="mui-row tableViewBorderTop" style="width:100%">
+							    <div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+									<h5 id="sncxLabel_3_name">停车场</h5>
+							    </div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="sncxLabel_3_icon" xlink:href="#icon-tingchechang"></use>
+									</svg>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+									<h5 id="sncxLabel_4_name">维修</h5>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="sncxLabel_4_icon" xlink:href="#icon-weixiu"></use>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="kccx" class="mui-card" style="margin-top: 10px;">
+						<div class="mui-card-header headerHight">
+							<h5 class="biaot" style="1">跨城出行</h5>
+							<label id="kccx_" class="mui-h5" style="color: #f0ad4e;">编辑</label>
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-row" style="width:100%">
+						        <div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+									<h5 id="kccx_1_name">公路路况</h5>
+						        </div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="kccx_1_icon" xlink:href="#icon-shishilukuang"></use>
+									</svg>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+									<h5 id="kccx_2_name">汽车票</h5>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="kccx_2_icon" xlink:href="#icon-tickect2-sel"></use>
+									</svg>
+								</div>
+						    </div>
+							<div class="mui-row tableViewBorderTop" style="width:100%">
+							    <div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+									<h5 id="kccx_3_name">火车票</h5>
+							    </div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="kccx_3_icon" xlink:href="#icon-huochepiao"></use>
+									</svg>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+									<h5 id="kccx_4_name">航班</h5>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="kccx_4_icon" xlink:href="#icon-hangbandingdan"></use>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="zwfw" class="mui-card" style="margin-top: 10px;">
+						<div class="mui-card-header headerHight">
+							<h5 class="biaot"  style="3">政务服务</h5>
+							<label id="zwfw_" class="mui-h5" style="color: #f0ad4e;">编辑</label>
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-row" style="width:100%">
+						        <div class="mui-col-sm-6 mui-col-xs-6 colStyle" style="text-align:center;">
+									<h5 id="zwfw_1_name">处罚信息</h5>
+									<svg class="icon" aria-hidden="true" style="margin-top: 3vw;">
+									  <use id="zwfw_1_icon" xlink:href="#icon-UI_icon_jianyichufa"></use>
+									</svg>
+						        </div>
+								<div class="mui-col-sm-6 mui-col-xs-6 colStyle tableViewBorderLeft" >
+									<div class="mui-row" style="width:100%">
+										<div class="mui-col-sm-8 mui-col-xs-8 colStyle" >
+											<h5 id="zwfw_2_name">隐患随手拍</h5>
+										</div>
+										<div class="mui-col-sm-4 mui-col-xs-4 colStyleTb" >
+											<svg class="icon" aria-hidden="true">
+											  <use id="zwfw_2_icon" xlink:href="#icon-yinhuan"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="mui-row tableViewBorderTop" style="width:100%">
+										<div class="mui-col-sm-8 mui-col-xs-8 colStyle" >
+											<h5 id="zwfw_3_name">12328热线</h5>
+										</div>
+										<div class="mui-col-sm-4 mui-col-xs-4 colStyleTb" >
+											<svg class="icon" aria-hidden="true">
+											  <use id="zwfw_3_icon" xlink:href="#icon-rexian"></use>
+											</svg>
+										</div>
+									</div>
+								</div>
+						    </div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<script src='../../js/jquery-3.1.1.js'></script>
+		<script src="../../js/mui/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/iconfont.js"></script>
+		<script src="../../js/config.js"></script>
+		<script src="../../js/mui/mui.picker.js"></script>
+		<script src="../../js/mui/mui.poppicker.js"></script>
+		<script src="../../js/mui/city.data.js"></script>
+		<script src="../../js/mui/city.data-3.js"></script>
+		
+		<script type="text/javascript">
+			mui.init();
+			//初始化页面区域滚动
+			mui('.mui-scroll-wrapper').scroll();
+			
+			var pulldown = false; //初始下拉刷新状态
+			var containerId = ".mui-content";
+			
+			function pulldownRefresh() {
+				setTimeout(function() {
+					mui(containerId).pullRefresh().endPulldownToRefresh(pulldown); //参数为true代表没有编辑数据了
+					
+					mui(containerId).pullRefresh().enablePullupToRefresh();
+				}, 500);
+			}
+			
+			$(function() { //比mui.plusReady函数先执行
+			});
+
+			var mainMv;
+			mui.plusReady(function() {
+				initContent();
+				
+				//监听自定义事件，用于和B.html页面进行通信
+				window.addEventListener("backData", function(e) {
+					var type = e.detail.type;
+					var title = e.detail.title;
+					var contentHtml = e.detail.contentHtml;
+					var parentId = e.detail.parentId;
+					
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+					
+					plus.storage.setItem(parentId+"typeNew", type );
+					plus.storage.setItem(parentId+"titleNew", title );
+					plus.storage.setItem(parentId+"contentHtmlNew", contentHtml );
+					plus.storage.setItem(parentId+"parentIdNew", parentId );
+					
+				});
+			});
+
+			mui(".mui-card div").on('tap', 'label', function() {
+				var type = this.parentNode.firstChild.nextSibling.getAttribute("style");
+				var title = this.parentNode.firstChild.nextSibling.innerHTML;
+				var id = this.parentNode.parentNode.getAttribute("id");
+				var contentHtml = this.parentNode.parentNode.children[1].innerHTML;
+				
+				var name_1 = '',icon_1 = '',name_2 = '',icon_2 = '',
+					name_3 = '',icon_3 = '',name_4 = '',icon_4 = '';
+				if('1' === type){
+					name_1 = $('#'+id+"_1_name").text();
+					icon_1 = $('#'+id+"_1_icon").attr("xlink:href");
+					name_2 = $('#'+id+"_2_name").text();
+					icon_2 = $('#'+id+"_2_icon").attr("xlink:href");
+					name_3 = $('#'+id+"_3_name").text();
+					icon_3 = $('#'+id+"_3_icon").attr("xlink:href");
+					name_4 = $('#'+id+"_4_name").text();
+					icon_4 = $('#'+id+"_4_icon").attr("xlink:href");
+				} else if('2' === type){
+					name_1 = $('#'+id+"_1_name").text();
+					icon_1 = $('#'+id+"_1_icon").attr("xlink:href");
+					name_2 = $('#'+id+"_2_name").text();
+					icon_2 = $('#'+id+"_2_icon").attr("xlink:href");
+				} else if('3' === type || '4' === type){
+					name_1 = $('#'+id+"_1_name").text();
+					icon_1 = $('#'+id+"_1_icon").attr("xlink:href");
+					name_2 = $('#'+id+"_2_name").text();
+					icon_2 = $('#'+id+"_2_icon").attr("xlink:href");
+					name_3 = $('#'+id+"_3_name").text();
+					icon_3 = $('#'+id+"_3_icon").attr("xlink:href");
+				}
+				
+				var more = this.innerHTML;
+				if('编辑' === more){
+					mui.openWindow({
+						url: 'gexhsybj.html',
+						id: 'gexhsybj',
+						show: {
+							aniShow: 'pop-in'
+						},
+						extras: {//extras里面的就是参数了
+						    type:type,
+							title: title,
+							parentId: id,
+							contentHtml: contentHtml,
+							name_1:name_1,
+							icon_1:icon_1,
+							name_2:name_2,
+							icon_2:icon_2,
+							name_3:name_3,
+							icon_3:icon_3,
+							name_4:name_4,
+							icon_4:icon_4,
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}	
+			});
+			
+			function initContent(){
+				var sncxLabelparentIdNew = plus.storage.getItem("sncxLabelparentIdNew");
+				if("" != sncxLabelparentIdNew && typeof(sncxLabelparentIdNew) != "undefined"){
+					var type = plus.storage.getItem("sncxLabeltypeNew");
+					var title = plus.storage.getItem("sncxLabeltitleNew");
+					var contentHtml = plus.storage.getItem("sncxLabelcontentHtmlNew");
+					var parentId = plus.storage.getItem("sncxLabelparentIdNew");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+				}
+				
+				var kccxparentIdNew = plus.storage.getItem("kccxparentIdNew");
+				if("" != kccxparentIdNew && typeof(kccxparentIdNew) != "undefined"){
+					var type = plus.storage.getItem("kccxtypeNew");
+					var title = plus.storage.getItem("kccxtitleNew");
+					var contentHtml = plus.storage.getItem("kccxcontentHtmlNew");
+					var parentId = plus.storage.getItem("kccxparentIdNew");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+				}
+				
+				var zwfwparentIdNew = plus.storage.getItem("zwfwparentIdNew");
+				if("" != zwfwparentIdNew && typeof(zwfwparentIdNew) != "undefined"){
+					var type = plus.storage.getItem("zwfwtypeNew");
+					var title = plus.storage.getItem("zwfwtitleNew");
+					var contentHtml = plus.storage.getItem("zwfwcontentHtmlNew");
+					var parentId = plus.storage.getItem("zwfwparentIdNew");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+				}
+			}
+			
+			mui("body").on("tap","#chongz",function(){
+				var sncxLabelparentId = plus.storage.getItem("sncxLabelparentId");
+				if("" != sncxLabelparentId && typeof(sncxLabelparentId) != "undefined"){
+					var type = plus.storage.getItem("sncxLabeltype");
+					var title = plus.storage.getItem("sncxLabeltitle");
+					var contentHtml = plus.storage.getItem("sncxLabelcontentHtml");
+					var parentId = plus.storage.getItem("sncxLabelparentId");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+					
+					plus.storage.setItem(parentId+"typeNew", type );
+					plus.storage.setItem(parentId+"titleNew", title );
+					plus.storage.setItem(parentId+"contentHtmlNew", contentHtml );
+					plus.storage.setItem(parentId+"parentIdNew", parentId );
+				}
+				
+				var kccxparentId = plus.storage.getItem("kccxparentId");
+				if("" != kccxparentId && typeof(kccxparentId) != "undefined"){
+					var type = plus.storage.getItem("kccxtype");
+					var title = plus.storage.getItem("kccxtitle");
+					var contentHtml = plus.storage.getItem("kccxcontentHtml");
+					var parentId = plus.storage.getItem("kccxparentId");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+					
+					plus.storage.setItem(parentId+"typeNew", type );
+					plus.storage.setItem(parentId+"titleNew", title );
+					plus.storage.setItem(parentId+"contentHtmlNew", contentHtml );
+					plus.storage.setItem(parentId+"parentIdNew", parentId );
+				}
+				
+				var zwfwparentId = plus.storage.getItem("zwfwparentId");
+				if("" != zwfwparentId && typeof(zwfwparentId) != "undefined"){
+					var type = plus.storage.getItem("zwfwtype");
+					var title = plus.storage.getItem("zwfwtitle");
+					var contentHtml = plus.storage.getItem("zwfwcontentHtml");
+					var parentId = plus.storage.getItem("zwfwparentId");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+					
+					plus.storage.setItem(parentId+"typeNew", type );
+					plus.storage.setItem(parentId+"titleNew", title );
+					plus.storage.setItem(parentId+"contentHtmlNew", contentHtml );
+					plus.storage.setItem(parentId+"parentIdNew", parentId );
+				}
+	        });
+	
+		</script>
+	</body>
+
+</html>

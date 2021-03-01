@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>联系人</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../../css/common.css">
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			
+			.title{
+				margin-top: 2rem;
+				margin-bottom: 1rem;
+				margin-left: 1rem;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">联系人</h1>
+		</header>
+		<div class="mui-content">
+		</div>
+	</body>
+	<script src='../../js/jquery-3.1.1.js'></script>
+	<script src="../../js/mui/mui.min.js"></script>
+	<script src="../../js/common.js"></script>
+	<script src="../../js/app.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true ,//启用右滑关闭功能
+		});
+		
+		mui.plusReady(function() {
+			var self = plus.webview.currentWebview();
+	        var USERNAME = self.USERNAME;
+	        var BANGDH = self.BANGDH;
+	        var MOBILE = self.MOBILE;
+	        var MOBILEOTHER = self.MOBILEOTHER;
+	        var DUANH = self.DUANH;
+	        
+	        html = "";
+	        if(checkTrue(USERNAME)){
+	        	html += '<div class="title">'+USERNAME+'</div>';
+	        }
+	        if(checkTrue(BANGDH) || checkTrue(MOBILE)
+	        	||checkTrue(MOBILEOTHER) || checkTrue(DUANH)){
+	        	html += '<ul class="mui-table-view">';
+	        	
+	        	if(checkTrue(BANGDH)){
+	        		html += "<li class='mui-table-view-cell' onclick=phoneCall('"+BANGDH+"')>" + "办公号码：&#12288;"+ BANGDH + '</li>';
+	        	}
+	        	if(checkTrue(MOBILE)){
+	        		html += "<li class='mui-table-view-cell' onclick=phoneCall('"+MOBILE+"')>" + "移动电话：&#12288;"+ MOBILE + '</li>';
+	        	}
+	        	if(checkTrue(MOBILEOTHER)){
+	        		html += "<li class='mui-table-view-cell' onclick=phoneCall('"+MOBILEOTHER+"')>" + "移动电话：&#12288;"+ MOBILEOTHER + '</li>';
+	        	}
+	        	if(checkTrue(DUANH)){
+	        		html += "<li class='mui-table-view-cell' onclick=phoneCall('"+DUANH+"')>" + "&#12288;&#12288;短号：&#12288;"+ DUANH + '</li>';
+	        	}
+	        	
+	        	html += '</ul>';
+	        }
+	        $('.mui-content').empty().html(html);
+		});
+		
+		function checkTrue(item){
+			return item != null && item != '' && item != 'undefined';
+		}
+		
+	</script>
+</html>

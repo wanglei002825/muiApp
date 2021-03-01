@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>全部</title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../css/common.css">
+		<link rel="stylesheet" type="text/css" href="../../css/gexhsy/preview.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<style type="text/css">
+			i {
+				font-style: normal;
+			}
+			ul {
+				list-style: none;
+				margin: 10px 5px;
+				padding: 0;
+				overflow: auto;
+				//min-height: 400px;
+			}
+			ul li {
+				float: left;
+				padding:1vw;
+				//border:1px solid grey;
+			}
+			.img-father {
+				position: relative;
+				padding: 10px;
+			}
+			.img-father .img-container {
+				height: 80px;
+				width: 80px;
+			}
+			.img-father .img-container img {
+				width: 100%;
+				height: 100%;
+				vertical-align: middle;
+				object-fit: cover;
+				/*border-top-left-radius: 3px;
+				border-top-right-radius: 3px;*/
+				
+				border-radius: 3px;
+			}
+			.img-father .img-content {
+				background-color: #F5F5F5;
+				box-shadow: 1px 0 1px #CCCCCC, -1px 0 1px #CCCCCC;
+				z-index: 10;
+				text-indent: 2px;
+				height: 21px;
+				line-height: 21px;
+				overflow: hidden;
+				border-bottom-left-radius: 3px;
+				border-bottom-right-radius: 3px;
+			}
+			.img-father .img-index {
+				position: absolute;
+				z-index: 9;
+				right: 15px;
+				bottom:15px ;
+				font-size: 14px;
+				height: 14px;
+				width: 14px;
+				line-height: 14px;
+				text-align: center;
+				color: white;
+				margin-left: -8px;
+				margin-top: -8px;
+			}
+			.img-father .img-remove {
+				display: none;
+				position: absolute;
+				top: 4px;
+				right: 4px;
+				color: white;
+				background: #8f8f94;
+				border-radius: 50%;
+				font-size: 14px;
+				border: 1px solid white;
+				font-weight: 1000;
+				height: 16px;
+				width: 16px;
+				line-height: 14px;
+				text-align: center;
+			}
+			.img-father .img-add {
+				display: none;
+				position: absolute;
+				top: 4px;
+				right: 4px;
+				color: white;
+				background: #00ff00;
+				border-radius: 50%;
+				font-size: 14px;
+				border: 1px solid white;
+				font-weight: 1000;
+				height: 16px;
+				width: 16px;
+				line-height: 14px;
+				text-align: center;
+			}
+			.div_border{
+				border: 1px dashed #c8c7cc;
+			}
+			.shake {
+				-webkit-transform-origin: center center;
+				-webkit-animation-name: shake-rotate;
+				-webkit-animation-duration: 0.5s;
+				-webkit-animation-timing-function: linear;
+				-webkit-animation-iteration-count: infinite;
+			}
+			.shakecontainer .img-container img {
+				border: 1px solid #CCCCCC;
+				border-radius: 6px;
+			}
+			.shakecontainer .img-content {
+				display: none;
+			}
+			.shakecontainer .img-remove,
+			.shakecontainer .img-add,
+			.shakecontainer .img-index {
+				display: block;
+			}
+			ul li[draggable=true] {
+				transform: scale(1.2);
+				-webkit-transform: scale(1.2);
+			}
+			ul li[draggable=true]>div {
+				-webkit-animation-name: none;
+			}
+			ul li[draggable=true] .img-remove,
+			ul li[draggable=true] .img-index {
+				display: none;
+			}
+			.sort-handle {
+				cursor: move;
+				cursor: -webkit-grabbing;
+			}
+			.sort-ghost {
+				opacity: 0;
+			}
+			.sort-chosen {
+				transform: scale(1.2);
+				-webkit-transform: scale(1.2);
+				transition: transform .3s;
+				-webkit-transition: transform .3s;
+			}
+			.sort-chosen:last-child {
+				transition: none;
+				-webkit-transition: none;
+			}
+			@-webkit-keyframes shake-rotate {
+				0% {
+					-webkit-transform: rotate(0deg);
+				}
+				12.5% {
+					-webkit-transform: rotate(1.25deg);
+				}
+				25% {
+					-webkit-transform: rotate(2.5deg);
+				}
+				37.5% {
+					-webkit-transform: rotate(1.25deg);
+				}
+				50% {
+					-webkit-transform: rotate(0deg);
+				}
+				62.5% {
+					-webkit-transform: rotate(-1.25deg);
+				}
+				75% {
+					-webkit-transform: rotate(-2.5deg);
+				}
+				87.5% {
+					-webkit-transform: rotate(-1.25deg);
+				}
+				100% {
+					-webkit-transform: rotate(0deg);
+				}
+			}
+			@media only screen and (min-width: 321px) and (max-width: 375px) {
+				ul {
+					margin-left: 8%;
+				}
+			}
+			
+			.iconSize{
+				width: 10vw;
+				height: 10vw;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">全部</h1>
+			<button type="button" id="btnorder" class="mui-btn mui-btn-blue mui-pull-right mui-btn-link">编辑</button>
+		</header>
+		<div class="mui-content" style="margin-top: 0vw;">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div class="yidbg" style="margin-top:12vw;background-color:#ffffff;">
+						<h4 style="padding-top: 2vw;">&nbsp;&nbsp;我的应用</h>
+						<ul id="myApp">
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-tian"></use>
+									</svg>
+									<h5 class="yidbg">建议提案</h5>
+									<i class="img-remove">×</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-zhengwu"></use>
+									</svg>
+									<h5 class="yidbg">督查督办</h5>
+									<i class="img-remove">×</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-gaosu"></use>
+									</svg>
+									<h5 class="zonghzf">高速执法</h5>
+									<i class="img-remove">×</i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="yidbg" style="background-color:#ffffff;margin-top: 5vw;">
+						<h4 style="padding-top: 2vw;">&nbsp;&nbsp;移动办公</h4>
+						<ul id="yidbgApp">
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-shouwen"></use>
+									</svg>
+									<h5 class="yidbg">收文管理</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-fawen"></use>
+									</svg>
+									<h5 class="yidbg">发文管理</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-daibanqianbao"></use>
+									</svg>
+									<h5 class="yidbg">签报管理</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-wendang"></use>
+									</svg>
+									<h5 class="yidbg">文档室</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-gongxiang"></use>
+									</svg>
+									<h5 class="yidbg">资料共享</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-ziyuan"></use>
+									</svg>
+									<h5 class="yidbg">每日一题</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-jianbao"></use>
+									</svg>
+									<h5 class="yidbg">简报信息</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-xinwenshenhe"></use>
+									</svg>
+									<h5 class="yidbg">新闻审核</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-yuqing"></use>
+									</svg>
+									<h5 class="yidbg">舆情日报</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-canhuijuan"></use>
+									</svg>
+									<h5 class="yidbg">参会情况</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-xinxiang"></use>
+									</svg>
+									<h5 class="yidbg">厅长信箱</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-chuanzhen"></use>
+									</svg>
+									<h5 class="yidbg">个人传真</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-zhengwu1"></use>
+									</svg>
+									<h5 class="yidbg">政务信息</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-zu"></use>
+									</svg>
+									<h5 class="yidbg">航务信息</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-heliuweizhix"></use>
+									</svg>
+									<h5 class="yidbg">运河先锋</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="jigsw" style="background-color:#ffffff;margin-top: 5vw;">
+						<h4 style="padding-top: 2vw;">&nbsp;&nbsp;机关事务</h4>
+						<ul id="jigswApp">
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-zhiban"></use>
+									</svg>
+									<h5 class="jigsw">值班管理</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-shitangguanli"></use>
+									</svg>
+									<h5 class="jigsw">食堂查询</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-chucha"></use>
+									</svg>
+									<h5 class="jigsw">出差管理</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-qingjia"></use>
+									</svg>
+									<h5 class="jigsw">请假管理</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-jiedailiang"></use>
+									</svg>
+									<h5 class="jigsw">接待申请</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-chuqinx"></use>
+									</svg>
+									<h5 class="jigsw">职工出勤</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="zonghzf" style="background-color:#ffffff;margin-top: 5vw;">
+						<h4 style="padding-top: 2vw;">&nbsp;&nbsp;综合执法</h4>
+						<ul id="zonghzfApp">
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-zu2"></use>
+									</svg>
+									<h5 class="zonghzf">公路执法</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-hangdaoshujun"></use>
+									</svg>
+									<h5 class="zonghzf">航道执法</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-zhongguohaishijulogo"></use>
+									</svg>
+									<h5 class="zonghzf">海事执法</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-yunguanju-"></use>
+									</svg>
+									<h5 class="zonghzf">运管执法</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="anqyj" style="background-color:#ffffff;margin-top: 5vw;">
+						<h4 style="padding-top: 2vw;">&nbsp;&nbsp;安全应急</h4>
+						<ul id="anqyjApp">
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-anquanjianguan"></use>
+									</svg>
+									<h5 class="anqyj">安全监管</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-yingjichuzhi"></use>
+									</svg>
+									<h5 class="anqyj">应急处置</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-yunhangjiance"></use>
+									</svg>
+									<h5 class="anqyj">运行监测</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-shipinjiankong"></use>
+									</svg>
+									<h5 class="anqyj">视频监控</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="ganghgl" style="background-color:#ffffff;margin-top: 5vw;">
+						<h4 style="padding-top: 2vw;">&nbsp;&nbsp;港航管理</h4>
+						<ul id="ganghglApp">
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-huabanfuben1"></use>
+									</svg>
+									<h5 class="ganghgl">危物监管</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-icon-maodi"></use>
+									</svg>
+									<h5 class="ganghgl">锚泊调度</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-zu1"></use>
+									</svg>
+									<h5 class="ganghgl">过闸缴费</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-chuanzha"></use>
+									</svg>
+									<h5 class="ganghgl">船闸调度</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="minhgl" style="background-color:#ffffff;margin-top: 5vw;">
+						<h4 style="padding-top: 2vw;">&nbsp;&nbsp;民航管理</h4>
+						<ul id="minhglApp">
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-huabanfuben"></use>
+									</svg>
+									<h5 class="minhgl">综合信息查询</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="yung" style="background-color:#ffffff;margin-top: 5vw;">
+						<h4 style="padding-top: 2vw;">&nbsp;&nbsp;运管</h4>
+						<ul id="yungApp">
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-weixiu"></use>
+									</svg>
+									<h5 class="yung">维修管理</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+							<li >
+								<div class="img-father">
+									<svg class="icon iconSize" aria-hidden="true">
+									  <use xlink:href="#icon-jiapeifuwu"></use>
+									</svg>
+									<h5 class="yung">驾培管理</h5>
+									<i class="img-add">+</i>
+								</div>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/gexhsy/Sortable.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/mui/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/mui/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/gexhsy/template-native.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/iconfont.js"></script>
+	<script type="text/javascript">
+		var myAppSort,yidbgAppSort,jigswAppSort,zonghzfAppSort,anqyjAppSort,anqyjAppSort,minhglAppSort,yungAppSort;
+		mui.init({
+			gestureConfig: {
+				longtap: true,
+			}
+		});
+		//初始化页面区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var ispaixu = false;
+		mui.ready(function() {
+			//mui.previewImage();
+			document.getElementById("btnorder").addEventListener('tap', function() {
+				init(false, true);
+			});
+			[].forEach.call(document.querySelectorAll(".img-add"), function(item, index) {
+				item.addEventListener('tap', function() {
+					buildIconLi(this,"remove");//另外模块恢复图标
+				});
+			});
+			[].forEach.call(document.querySelectorAll(".img-remove"), function(item, index) {
+				item.addEventListener('tap', function() {
+					buildIconLi(this,"add");//另外模块恢复图标
+				});
+			});
+			mui("ul li").on('longtap', 'div', function() {
+				if (document.querySelector("ul li .img-father").className.indexOf('div_border') != -1)
+					return;
+				initForSort(false);
+			});
+			setSortable(false);
+		});
+		
+		function buildIconLi(object,addOrRemove){
+			var liObject = object.parentNode.parentNode;
+			var iObject = object.parentNode.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
+			iObject.setAttribute('class', "img-"+addOrRemove);
+			var leib = object.parentNode.firstChild.nextSibling.nextSibling.nextSibling.getAttribute('class');
+			if('add' === addOrRemove){
+				iObject.innerHTML="+";
+				iObject.addEventListener('tap', function() {
+					buildIconLi(this,"remove");//另外模块恢复图标
+				});
+				document.getElementById(leib+"App").appendChild(liObject);
+			} else if('remove' === addOrRemove){
+				iObject.innerHTML="×";
+				iObject.addEventListener('tap', function() {
+					buildIconLi(this,"add");//另外模块恢复图标
+				});
+				document.getElementById("myApp").appendChild(liObject);
+			}
+		}
+		
+		function init(islongtap, isTriggerByBtn) {
+			if (!ispaixu) {
+				if (isTriggerByBtn) {
+					mui("ul li .img-father").each(function() {
+						this.classList.add('shakecontainer');
+						// this.classList.add('shake');
+						this.classList.add('div_border');
+					});
+					document.getElementById("btnorder").innerText = '完成';
+				};
+				//}!myAppSort && setSortable(isTriggerByBtn) && !yidbgAppSort;
+				ispaixu = true;
+			} else {
+				if (islongtap) return;
+				ispaixu = false;
+				document.getElementById("btnorder").innerText = '编辑';
+				mui("ul li .img-father").each(function() {
+					this.classList.remove('shakecontainer');
+					// this.classList.remove('shake');
+					this.classList.remove('div_border');
+				});
+			}
+		};
+
+		function initForSort(isTriggerByBtn) {
+			if (isTriggerByBtn) return;
+			mui("ul li .img-father").each(function() {
+				this.classList.add('shakecontainer');
+				// this.classList.add('shake');
+				this.classList.add('div_border');
+			});
+			document.getElementById("btnorder").innerText = '完成';
+			ispaixu = true;
+		};
+		var touchtime, item_offset = {
+			left: '',
+			top: ''
+		};
+
+		function setSortable(isTriggerByBtn) {
+			myAppSort = new Sortable(document.getElementById("myApp"), {
+				chosenClass: 'sort-chosen',
+				ghostClass: 'sort-ghost',
+				delay: 150,
+				animation: 400,
+				handle: '.iconSize',
+				//-------- 自定义属性
+				isDropAnimation: false, //DragDrop时是否对DragEl启用滑动效果
+				ghostScale:1.2,//DragGhostEl 缩放效果
+				//--------
+				onStart: function( /**Event*/ evt) { // 拖拽
+					touchtime = evt.timeStamp;
+					item_offset.left = evt.item.offsetLeft;
+					item_offset.top = evt.item.offsetTop;
+					var itemEl = evt.item;
+				},
+				onEnd: function( /**Event*/ evt) { // 拖拽
+					var itemEl = evt.item;
+					var timespan = evt.timeStamp - touchtime;
+					if (timespan < 200) {} else if (itemEl.offsetLeft == item_offset.left && itemEl.offsetTop == item_offset.top) {} else {
+						reset_order();
+					}
+					touchtime = null;
+				},
+			});
+			yidbgAppSort = new Sortable(document.getElementById("yidbgApp"), {
+				chosenClass: 'sort-chosen',
+				ghostClass: 'sort-ghost',
+				delay: 150,
+				animation: 400,
+				handle: '.iconSize',
+				//-------- 自定义属性
+				isDropAnimation: false, //DragDrop时是否对DragEl启用滑动效果
+				ghostScale:1.2,//DragGhostEl 缩放效果
+				//--------
+				onStart: function( /**Event*/ evt) { // 拖拽
+					touchtime = evt.timeStamp;
+					item_offset.left = evt.item.offsetLeft;
+					item_offset.top = evt.item.offsetTop;
+					var itemEl = evt.item;
+				},
+				onEnd: function( /**Event*/ evt) { // 拖拽
+					var itemEl = evt.item;
+					var timespan = evt.timeStamp - touchtime;
+					if (timespan < 200) {} else if (itemEl.offsetLeft == item_offset.left && itemEl.offsetTop == item_offset.top) {} else {
+						reset_order();
+					}
+					touchtime = null;
+				},
+			});
+			jigswAppSort = new Sortable(document.getElementById("jigswApp"), {
+				chosenClass: 'sort-chosen',
+				ghostClass: 'sort-ghost',
+				delay: 150,
+				animation: 400,
+				handle: '.iconSize',
+				//-------- 自定义属性
+				isDropAnimation: false, //DragDrop时是否对DragEl启用滑动效果
+				ghostScale:1.2,//DragGhostEl 缩放效果
+				//--------
+				onStart: function( /**Event*/ evt) { // 拖拽
+					touchtime = evt.timeStamp;
+					item_offset.left = evt.item.offsetLeft;
+					item_offset.top = evt.item.offsetTop;
+					var itemEl = evt.item;
+				},
+				onEnd: function( /**Event*/ evt) { // 拖拽
+					var itemEl = evt.item;
+					var timespan = evt.timeStamp - touchtime;
+					if (timespan < 200) {} else if (itemEl.offsetLeft == item_offset.left && itemEl.offsetTop == item_offset.top) {} else {
+						reset_order();
+					}
+					touchtime = null;
+				},
+			});
+			zonghzfAppSort = new Sortable(document.getElementById("zonghzfApp"), {
+				chosenClass: 'sort-chosen',
+				ghostClass: 'sort-ghost',
+				delay: 150,
+				animation: 400,
+				handle: '.iconSize',
+				//-------- 自定义属性
+				isDropAnimation: false, //DragDrop时是否对DragEl启用滑动效果
+				ghostScale:1.2,//DragGhostEl 缩放效果
+				//--------
+				onStart: function( /**Event*/ evt) { // 拖拽
+					touchtime = evt.timeStamp;
+					item_offset.left = evt.item.offsetLeft;
+					item_offset.top = evt.item.offsetTop;
+					var itemEl = evt.item;
+				},
+				onEnd: function( /**Event*/ evt) { // 拖拽
+					var itemEl = evt.item;
+					var timespan = evt.timeStamp - touchtime;
+					if (timespan < 200) {} else if (itemEl.offsetLeft == item_offset.left && itemEl.offsetTop == item_offset.top) {} else {
+						reset_order();
+					}
+					touchtime = null;
+				},
+			});
+			
+			anqyjAppSort = new Sortable(document.getElementById("anqyjApp"), {
+				chosenClass: 'sort-chosen',
+				ghostClass: 'sort-ghost',
+				delay: 150,
+				animation: 400,
+				handle: '.iconSize',
+				//-------- 自定义属性
+				isDropAnimation: false, //DragDrop时是否对DragEl启用滑动效果
+				ghostScale:1.2,//DragGhostEl 缩放效果
+				//--------
+				onStart: function( /**Event*/ evt) { // 拖拽
+					touchtime = evt.timeStamp;
+					item_offset.left = evt.item.offsetLeft;
+					item_offset.top = evt.item.offsetTop;
+					var itemEl = evt.item;
+				},
+				onEnd: function( /**Event*/ evt) { // 拖拽
+					var itemEl = evt.item;
+					var timespan = evt.timeStamp - touchtime;
+					if (timespan < 200) {} else if (itemEl.offsetLeft == item_offset.left && itemEl.offsetTop == item_offset.top) {} else {
+						reset_order();
+					}
+					touchtime = null;
+				},
+			});
+			
+			ganghglAppSort = new Sortable(document.getElementById("ganghglApp"), {
+				chosenClass: 'sort-chosen',
+				ghostClass: 'sort-ghost',
+				delay: 150,
+				animation: 400,
+				handle: '.iconSize',
+				//-------- 自定义属性
+				isDropAnimation: false, //DragDrop时是否对DragEl启用滑动效果
+				ghostScale:1.2,//DragGhostEl 缩放效果
+				//--------
+				onStart: function( /**Event*/ evt) { // 拖拽
+					touchtime = evt.timeStamp;
+					item_offset.left = evt.item.offsetLeft;
+					item_offset.top = evt.item.offsetTop;
+					var itemEl = evt.item;
+				},
+				onEnd: function( /**Event*/ evt) { // 拖拽
+					var itemEl = evt.item;
+					var timespan = evt.timeStamp - touchtime;
+					if (timespan < 200) {} else if (itemEl.offsetLeft == item_offset.left && itemEl.offsetTop == item_offset.top) {} else {
+						reset_order();
+					}
+					touchtime = null;
+				},
+			});
+			
+			minhglAppSort = new Sortable(document.getElementById("minhglApp"), {
+				chosenClass: 'sort-chosen',
+				ghostClass: 'sort-ghost',
+				delay: 150,
+				animation: 400,
+				handle: '.iconSize',
+				//-------- 自定义属性
+				isDropAnimation: false, //DragDrop时是否对DragEl启用滑动效果
+				ghostScale:1.2,//DragGhostEl 缩放效果
+				//--------
+				onStart: function( /**Event*/ evt) { // 拖拽
+					touchtime = evt.timeStamp;
+					item_offset.left = evt.item.offsetLeft;
+					item_offset.top = evt.item.offsetTop;
+					var itemEl = evt.item;
+				},
+				onEnd: function( /**Event*/ evt) { // 拖拽
+					var itemEl = evt.item;
+					var timespan = evt.timeStamp - touchtime;
+					if (timespan < 200) {} else if (itemEl.offsetLeft == item_offset.left && itemEl.offsetTop == item_offset.top) {} else {
+						reset_order();
+					}
+					touchtime = null;
+				},
+			});
+			
+			yungAppSort = new Sortable(document.getElementById("yungApp"), {
+				chosenClass: 'sort-chosen',
+				ghostClass: 'sort-ghost',
+				delay: 150,
+				animation: 400,
+				handle: '.iconSize',
+				//-------- 自定义属性
+				isDropAnimation: false, //DragDrop时是否对DragEl启用滑动效果
+				ghostScale:1.2,//DragGhostEl 缩放效果
+				//--------
+				onStart: function( /**Event*/ evt) { // 拖拽
+					touchtime = evt.timeStamp;
+					item_offset.left = evt.item.offsetLeft;
+					item_offset.top = evt.item.offsetTop;
+					var itemEl = evt.item;
+				},
+				onEnd: function( /**Event*/ evt) { // 拖拽
+					var itemEl = evt.item;
+					var timespan = evt.timeStamp - touchtime;
+					if (timespan < 200) {} else if (itemEl.offsetLeft == item_offset.left && itemEl.offsetTop == item_offset.top) {} else {
+						reset_order();
+					}
+					touchtime = null;
+				},
+			});
+			
+		};
+
+		function reset_order() {
+			//重新进行排序
+			[].forEach.call(document.querySelectorAll("#myApp li"), function(item, index) {
+				var li = item;
+				li.setAttribute('new-data-li', index + 1);
+				//li.querySelector('.img-index').innerText = index + 1;
+			});
+			[].forEach.call(document.querySelectorAll("#yidbgApp li"), function(item, index) {
+				var li = item;
+				li.setAttribute('new-data-li', index + 1);
+				//li.querySelector('.img-index').innerText = index + 1;
+			});
+			[].forEach.call(document.querySelectorAll("#jigswApp li"), function(item, index) {
+				var li = item;
+				li.setAttribute('new-data-li', index + 1);
+				//li.querySelector('.img-index').innerText = index + 1;
+			});
+			[].forEach.call(document.querySelectorAll("#zonghzfApp li"), function(item, index) {
+				var li = item;
+				li.setAttribute('new-data-li', index + 1);
+				//li.querySelector('.img-index').innerText = index + 1;
+			});
+			[].forEach.call(document.querySelectorAll("#anqyjApp li"), function(item, index) {
+				var li = item;
+				li.setAttribute('new-data-li', index + 1);
+				//li.querySelector('.img-index').innerText = index + 1;
+			});
+			[].forEach.call(document.querySelectorAll("#ganghglApp li"), function(item, index) {
+				var li = item;
+				li.setAttribute('new-data-li', index + 1);
+				//li.querySelector('.img-index').innerText = index + 1;
+			});
+			[].forEach.call(document.querySelectorAll("#minhglApp li"), function(item, index) {
+				var li = item;
+				li.setAttribute('new-data-li', index + 1);
+				//li.querySelector('.img-index').innerText = index + 1;
+			});
+			[].forEach.call(document.querySelectorAll("#yungApp li"), function(item, index) {
+				var li = item;
+				li.setAttribute('new-data-li', index + 1);
+				//li.querySelector('.img-index').innerText = index + 1;
+			});
+		};
+	</script>
+
+</html>

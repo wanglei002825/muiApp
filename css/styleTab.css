@@ -1,0 +1,84 @@
+.wrap{
+	margin-top: 20%;
+}
+
+ul,li,header{display:block;margin:0;padding:0;border:0;}
+ul,li{ list-style: none}
+a{text-decoration:none;}
+/*iphone上的Safari解析input[typw="submit"]和input[type="submit"]按钮会以苹果浏览器默认的UI进行渲染，解决发放如下*/
+input,input[type="button"],input[type="submit"]，input[type="reset"]{-webkit-appearance: none;}
+/*header*/
+.favor-header-bar{
+    background-color: #4cb7d4;
+    padding: 0 1.1rem;
+    overflow: hidden;
+    height: 3.46rem;
+    line-height: 3.46rem;
+    border-bottom: 1px solid #e1e1e1;
+}
+.favor-header-bar p{
+    text-align: center;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 3.46rem;
+    height: 3.46rem;
+    margin: 0;
+}
+.tabClick{ background: #f3f3f3; overflow: hidden}
+.tabClick li{ height:3rem; line-height: 3rem; width: 50%; float: left; text-align: center;color: #999;}
+.tabClick li.active{ color: #4cb7d4; transition: 0.1s; font-weight: bold}
+.tabCon{ overflow: hidden}
+.tabBox{ position: relative}
+.tabList{
+    word-break: break-all; 
+    width:100%;float:left; 
+    /* line-height:100px;  */
+}
+.lineBorder{ height: 2px; overflow: hidden; border-bottom:1px solid #eee; background: #f3f3f3}
+.lineDiv{ background: #4cb7d4; height: 2px; width: 50%;}
+.statistics{
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:flex-end;
+    color: #666;
+    margin-top: 2rem;
+}
+.statistics li{
+    width: 50%;
+    text-align:center;
+}
+.statistics .statmoney{
+    width: 50%;
+}
+.statistics .model{
+    height: 1.2rem;
+    line-height: 1.2rem;
+    color: #000;
+    font-size:0.8rem;
+}
+#chart2{
+    margin-top: 0.8rem;
+}
+.timeyear{
+    width: 3rem;
+    text-align: center;
+    border-radius: 1rem;
+    padding: 0.1rem 0.8rem;
+    font-size: 0.88rem;
+    color: #4cb7d4;
+    border: 1px solid #4cb7d4;
+    float: right;
+}
+.tabList .shijian{
+    padding: 0.6rem 1rem 0 1rem;
+    height: 2rem;
+}
+.tabList .shijian .biaoti{
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+    color: #000;
+    float: left;
+}

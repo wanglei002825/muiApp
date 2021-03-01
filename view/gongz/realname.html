@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/common.css">
+		<style>
+			body {
+				text-align: center;
+				background-color: rgba(0, 0, 0, 0~1);
+			}
+			.contentcss {
+				text-align: center;
+				margin: 0 auto;
+				vertical-align: middle;
+				background-color: rgba(0, 0, 0, 0~1)
+			}
+			
+			.headcss {
+				border: 1px solid red;
+				width: 300px;
+				height: 300px;
+				background-color: wheat;
+				margin: 0 auto;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+			
+			#style{
+				font-size:25px;margin-top:20%;color: #FFFFFF;
+			}
+			.videocss {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body style="background: rgb(2,2,2,0.5);">
+		<div class="mui-content contentcss" id="content" style="background: rgb(2,2,2,0);">
+			<div class="headcss" id="headdiv">
+				<video id="camvideo" class="videocss" autoplay></video>
+			</div>
+			<div id="style" >请将头部对准摄像头</div>
+		</div>
+	</body>
+
+</html>
+<script src="../../js/mui.min.js"></script>
+<script src='../../js/jquery-2.2.1.min.js'></script>
+<script src='../../js/facecheck/alive_face.js'></script>
+<script src='../../js/facecheck/ccv.js'></script>
+<script src='../../js/facecheck/clmtrackr.js'></script>
+<script type="text/javascript">
+	mui.init();
+	// 注意本例需要在HTTPS协议网站中运行，新版本Chrome中getUserMedia接口在http下不再支持。
+	// 设置事件监听器
+	var video, sinterval,pageid;
+	
+	window.addEventListener("DOMContentLoaded", function() {
+		//获取屏幕长宽高定义摄像头出现位置
+		var width = document.documentElement.clientWidth;
+		var height = document.documentElement.clientHeight;
+		document.getElementById("content").style.height = (height - 200) + "px";
+		document.getElementById("content").style.width = width + "px";
+		document.getElementById("headdiv").style.marginTop = (height - 500) / 2 + "px";
+		if(navigator.mediaDevices === undefined) {
+		}
+		navigator.getUserMedia = navigator.getUserMedia ||
+			navigator.webkitGetUserMedia ||
+			navigator.mozGetUserMedia;
+
+		if(navigator.getUserMedia) {
+			navigator.getUserMedia({
+					audio: false,
+					video: {
+						facingMode: "user",
+						width: 300,
+						height: 300
+					}
+				},
+				function(stream) {
+					video = document.querySelector('video');
+					video.srcObject = stream;
+					video.onloadedmetadata = function(e) {
+						video.play();
+						sinterval = setInterval(function() {
+							$("#style").text("识别中，请稍候……");
+							var canvas = document.createElement("canvas");
+							canvas.width = video.videoWidth;
+							canvas.height = video.videoHeight;
+							canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+							var dataURL = canvas.toDataURL("image/jpeg", 1.0); //第二个参数是质量 
+//							$("#im").attr("src",dataURL);
+							var imageDataB64 = dataURL.substring(23); 
+							opencarema(imageDataB64);
+						}, 5000);
+						/*setTimeout(function(){
+							var preView = plus.webview.getWebviewById(pageid);
+							console.log(pageid )
+							mui.fire(preView, 'loadfunction', {});
+							plus.webview.currentWebview().close();
+						},5000)*/
+					};
+				},
+				function(err) {
+					mui.alert("获取摄像头失败。");
+				}
+			);
+		} else {
+			mui.alert("当前环境不适合，无法调用摄像头。");
+		}
+
+	}, false);
+	
+	var count;
+	mui.plusReady(function(){
+		var self = plus.webview.currentWebview(); //获取当前窗体对象
+		pageid=self.pageid;
+	});
+	//人脸识别
+	function opencarema(imgurl) {
+		var url = urlmoren + "/phone/facecheck/facecheckfile";
+		mui.ajax(url, {
+			data: {
+				path: imgurl,
+				loginname: localStorage.getItem('account')
+			},
+			dataType: 'json', //服务器返回json格式数据
+			type: 'post', //HTTP请求类型
+			timeout: 20000,
+			success: function(data) {
+				var code = data.code;
+				if(code == 0) {
+					$("#style").text("验证成功！正在跳转。");
+					//清除轮询
+					window.clearInterval(sinterval);
+					
+					var preView = plus.webview.getWebviewById(pageid);
+					//触发上一个页面刷新图片事件 
+					mui.fire(preView, 'loadfunction', {});
+					plus.webview.currentWebview().close();
+					
+				} else {
+					++count;
+					if(count>=5){
+						mui.alert("请本人进行操作。");
+						window.clearInterval(sinterval);
+						plus.webview.currentWebview().close();	
+					}
+				}
+			}
+		});
+	}
+</script>

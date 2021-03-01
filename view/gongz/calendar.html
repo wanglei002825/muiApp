@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>我的日程</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,minimal-ui" />
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="../../css/common.css" /> -->
+	<link rel="stylesheet" type="text/css" href="../../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/calendar.css" />
+	<link rel="stylesheet" href="../../css/styleTab.css" type="text/css" media="all">
+
+    <style>
+        .act {
+            margin-top: 85px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .act button {
+            margin-right: 30px;
+        }
+		
+		.mui-bar-nav ~ .mui-content {
+			padding-top: 0px;
+		}
+		
+		/*设置为蓝色*/
+		.mui-bar{background-color:#4cb7d4}
+		/*标题颜色为白色*/
+		.mui-title{color:ffffff}
+		
+		.mui-bar a{
+			color: #ffffff;
+		}
+		.mui-title{
+			color: #ffffff;
+		}
+		.mui-bar .mui-btn-link{
+			color: #ffffff;
+		}
+    </style>
+</head>
+
+<body>
+
+	<header class="mui-bar mui-bar-nav" style="color: #FFFFFF;">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">我的日程</h1>
+		
+		<span id="addRic" class="mui-icon mui-icon-plus" style="float: right;"></span>
+	</header>
+
+	<div class="wrap">
+		<ul class="week-f">
+			<li>周一</li>
+			<li>周二</li>
+			<li>周三</li>
+			<li>周四</li>
+			<li>周五</li>
+			<li class="wk">周六</li>
+			<li class="wk">周日</li>
+		</ul>
+
+		<div id="monthSwich" style="background-color: #ffffff">
+			<span id="prevMonth" class="mui-icon mui-icon-arrowleft" style="margin-left:30vw;"></span>
+			<h2 id="niany"></h2>
+			<span id="nextMonth" class="mui-icon mui-icon-arrowright"></span>
+		</div>
+		
+		<div id="calendar"></div>
+
+	</div>
+	
+	<div class="mui-content">
+		<div class="" id="wrap">
+		    <ul class="tabClick" style="background:#ffffff;">
+		        <li class="active">我的日程</li>
+		        <li>公共活动</li>
+		    </ul>
+		    <div class="lineBorder">
+		        <div class="lineDiv"><!--移动的div--></div>
+		    </div>
+		    <div class="tabCon">
+				<div class="tabBox">
+					<div class="tabList">
+						<ul id="wodrc" class="wodrc" style="background:#ffffff;">
+							<!-- <li style="border-bottom:1px solid #efeff4;margin-left:5vw;height:12vw;line-height: 12vw;">sss</li> -->
+						</ul>
+					</div>
+					<div class="tabList">
+						<ul id="gongghd" style="background:#ffffff;">
+							<!-- <li style="border-bottom:1px solid #efeff4;margin-left:5vw;height:12vw;line-height: 12vw;">sss</li> -->
+						</ul>
+					</div>
+				</div>
+		    </div>
+		</div>
+	</div>
+	
+	<!-- <div class="mui-content" >
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+			</div>
+		</div>
+	</div> -->
+
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/tab.js"></script>
+<!-- <script src="../../js/jquery-2.2.1.min.js"></script> -->
+<script src="../../js/jqmobi.js"></script>
+<script src="../../js/calendar.js"></script>
+
+<script>
+    (function() {
+        calendarIns = new calendar.calendar( {
+            count: 1,
+            selectDate: new Date(),
+            selectDateName: '',
+            minDate: new Date( -new Date() + 365 * 86400000 ),
+            maxDate: new Date( +new Date() + 365 * 86400000 ),
+            isShowHoliday: true,
+            isShowWeek: false
+        } );
+		
+		setYearMonth();
+		
+        $.bind( calendarIns, 'afterSelectDate', function( event ) {
+            var curItem = event.curItem,
+			date = event.date,
+			dateName = event.dateName;
+			console.log( 'event',event );
+
+            calendarIns.setSelectDate( date );
+			
+			var li = document.getElementsByClassName("day")[0].children;
+			for(var i = 0; i < li.length; i++) {
+				var liObject = li[i];
+				var dateDay = liObject.getAttribute("data-date");
+				
+				var liObjectStyle = liObject.getAttribute("style");
+				if("background-color:#86a079;line-height:20px;color:#ffffff;" === liObjectStyle){
+					liObject.lastChild.innerHTML="日程";
+				}
+			}
+			
+			var wodrcLi = document.getElementsByClassName("wodrc")[0].children;
+			for(var i = 0; i < wodrcLi.length; i++) {
+				var wodrcLiObject = wodrcLi[i];
+				var wodrcLiObjectClass = wodrcLiObject.getAttribute("class");
+				if(wodrcLiObjectClass != date){
+					wodrcLiObject.style="display:none;border-bottom:1px solid #efeff4;margin-left:5vw;height:12vw;line-height: 12vw;";
+				} else {
+					wodrcLiObject.style="display:block;border-bottom:1px solid #efeff4;margin-left:5vw;height:12vw;line-height: 12vw;";
+				}
+			}
+        } );
+
+        $( '#prevMonth' ).on( 'click', function() {
+            calendarIns.prevMonth();
+			setYearMonth();
+        } );
+
+        $( '#nextMonth' ).on( 'click', function() {
+            calendarIns.nextMonth();
+			setYearMonth();
+        } );
+		
+		//监听自定义事件，用于和B.html页面进行通信
+		window.addEventListener("backData", function(e) {
+			var isDelete = e.detail.isDelete;
+			if(isDelete){//删除
+			    var liId = e.detail.startDate+"_"+e.detail.startTime+"_"+e.detail.tixrw;
+			    var wodrc = document.getElementById("wodrc"); 
+				var liObject = document.getElementById(liId);
+				wodrc.removeChild(liObject);
+				
+				var isRicStyleChang = true;
+				var wodrcLi = document.getElementsByClassName("wodrc")[0].children;
+				for(var i = 0; i < wodrcLi.length; i++) {
+					var wodrcLiObject = wodrcLi[i];
+					var wodrcLiObjectClass = wodrcLiObject.getAttribute("class");
+					if(wodrcLiObjectClass == e.detail.startDate){
+						isRicStyleChang = false;
+						break;
+					}
+				}
+				if(isRicStyleChang){
+					//更改日程日期的样式
+					var li = document.getElementsByClassName("day")[0].children;
+					for(var i = 0; i < li.length; i++) {
+						var liObject = li[i];
+						var date = liObject.getAttribute("data-date");
+						if(e.detail.startDate === date){
+							liObject.setAttribute("style","");
+							liObject.lastChild.innerHTML="";
+						}
+					}
+				}
+			} else {//新增
+				var ric = "默认日程" + "(" + e.detail.startDate + " " + e.detail.startTime + ")";
+				if("" != e.detail.tixrw){
+					ric = e.detail.tixrw + "(" + e.detail.startDate + " " + e.detail.startTime + ")";
+				}
+				var wodrc = document.getElementById("wodrc");
+				var li = document.createElement("li");
+				li.setAttribute("id", e.detail.startDate+"_"+e.detail.startTime+"_"+e.detail.tixrw);
+				li.setAttribute("class", e.detail.startDate);
+				li.setAttribute("style", "border-bottom:1px solid #efeff4;margin-left:5vw;height:12vw;line-height: 12vw;");
+				li.innerHTML = ric;
+				li.addEventListener('tap', function() {
+					openCreateCalendar(true,e.detail.startDate,e.detail.startTime,e.detail.tixrw);
+				});
+				wodrc.appendChild(li);
+				
+				//更改日程日期的样式
+				var li = document.getElementsByClassName("day")[0].children;
+				for(var i = 0; i < li.length; i++) {
+					var liObject = li[i];
+					var date = liObject.getAttribute("data-date");
+					if(e.detail.startDate === date){
+						liObject.setAttribute("style","background-color:#86a079;line-height:20px;color:#ffffff;");
+						liObject.lastChild.innerHTML="日程";
+					} else {
+						var liObjectStyle = liObject.getAttribute("style");
+						if("background-color:#86a079;line-height:20px;color:#ffffff;" === liObjectStyle){
+							liObject.lastChild.innerHTML="日程";
+						}
+					}
+				}
+			}
+			
+		});
+		
+    })();
+	
+	function setYearMonth(){
+		var year = calendarIns.year;
+		var month = calendarIns.month;
+		var yearMonth = year + '年' + month + '月';
+		var niany = document.getElementById("niany");
+		niany.innerHTML = yearMonth;
+	}
+	
+	$( '#addRic' ).on( 'click', function() {
+	    var myDate = new Date();
+	    var h = appendZero(myDate.getHours());
+	    var min = appendZero(myDate.getMinutes());
+	    var time = h + ':' + min;
+		
+		var selectDate = calendarIns.selectDate;
+		if(typeof(selectDate) == 'string'){//日期选择过
+			openCreateCalendar(false,selectDate,time,"");
+		} else {//日期没有选择过
+			var year = selectDate.getFullYear();
+			var month = selectDate.getMonth() + 1;
+			var day = selectDate.getDate();
+			var date = year + '-' + month + '-' + day;
+			
+			openCreateCalendar(false,date,time,"");
+		}
+	} );
+	
+	$( '#today' ).on( 'click', function() {
+	    var myDate = new Date();
+		var year = myDate.getFullYear();
+		var month = myDate.getMonth() + 1;
+		var day = myDate.getDate();
+		var today = year + '-' + month + '-' + day;
+		
+		calendarIns.setSelectDate( today );
+	} );
+	
+	function openCreateCalendar(isRic,startDate,startTime,tixrw){
+		mui.openWindow({
+			 url: 'calendarCreate.html',
+			 id: 'calendarCreate',
+			 show: {
+					aniShow: 'pop-in'
+			  },
+			  extras: {    //extras里面的就是参数了
+			        isRic:isRic,
+					startDate: startDate,
+					startTime: startTime,
+					tixrw: tixrw
+			   },
+			   waiting: {
+					 autoShow: true, //自动显示等待框，默认为true
+			   }
+		});
+	}
+	
+	function appendZero(obj) {
+		if(obj<10) return "0" +""+ obj;
+		else return obj;
+	}
+</script>
+
+</body>
+</html>

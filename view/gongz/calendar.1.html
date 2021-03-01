@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+    <link  type="text/css"  rel="stylesheet" href="https://cdn.bootcss.com/fullcalendar/3.8.2/fullcalendar.min.css">
+</head>
+<body>
+<div id="div_name"></div>
+<div id="dialog">
+	<input type="text">
+	</input>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.21.0/moment.js"></script>
+<script src="https://cdn.bootcss.com/fullcalendar/3.9.0/fullcalendar.js"></script>
+<script src="https://cdn.bootcss.com/fullcalendar/3.9.0/gcal.js"></script>
+<script src="https://cdn.bootcss.com/fullcalendar/3.9.0/locale-all.js"></script>
+<script src="https://cdn.bootcss.com/artDialog/7.0.0/dialog.js"></script>
+<script>
+    (function ($) {
+        console.log(typeof fullCalendar);
+
+        $("#div_name").fullCalendar(
+            {
+                header: {
+                    left: 'prev today next',
+                    center: 'title',
+                    // right: 'agendaWeek,agendaDay'
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+                dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+                dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+                today: ["今天"],
+                buttonText:{//设置日历头部各按钮的显示文本信息
+                    today:    '今天/本周',
+                    month:    '月',
+                    week:     '周',
+                    day:      '日',
+                },
+				//height: 1080,
+                axisFormat: 'H(:mm)',
+                defaultView:'month',
+                allDaySlot:true,
+                allDayText:'全天',
+                editable: false,//不能进行编辑
+                events:function(start, end, timezone, callback) {//ajax请求数据并显示在响应时间段内
+                    console.log(timezone);
+                    console.log(callback.toString());
+                    console.log(end);
+                    console.log(start);
+                    var events = [];
+                    var data = [{
+                        date:"2018-03-24T13:15:30Z",
+                        isrent:1,
+                        is_special:"0",
+                        price:"600.00",
+                        stock:"1"
+                    },{
+                        date:"2018-03-24T08:15:30Z",
+                        isrent:1,
+                        is_special:"5",
+                        price:"600.00",
+                        stock:"1"
+                    },{
+                        date:"2018-03-24T04:15:30Z",
+                        isrent:1,
+                        is_special:"1",
+                        price:"600.00",
+                        stock:"1"
+                    }];
+                    $.each(data,function(i,c) {
+                        if (c.is_special == '1') {
+                            events.push({
+                                title: '￥'+c.price+','+c.stock+'套',
+                                start: c.date , // will be parsed
+                                color: '#F2EB44'
+                            });
+                        } else {
+                            events.push({
+                                title: '￥'+c.price+','+c.stock+'套',
+                                start: c.date , // will be parsed
+                                color: '#B4EABE'
+                            });
+                        }
+
+                    });
+                    console.log(events);
+                    callback(events)
+                },
+
+                dayClick: function(date, allDay, jsEvent, view) {//点击空白处，添加信息
+                    console.log(date);
+                    console.log(allDay);
+                    console.log(jsEvent);
+                    console.log(view);
+                    var selDate =date.format('YYYY-MM-DD');//格式化日期
+                    var  d = dialog({title:"添加教育场地申请",
+                        content:$("#dialog").html() ,//"url:"+addnewurl+"",parent:$dialogParent(),
+                        cancelVal: "关闭",cancel: true,width: "700",height: "300px",lock:true,
+                        close:function(){
+                            window.location.href= "${base}/education/list/eduSiteApplyDayList.jsp";
+                        }});
+                    d.showModal();
+					//$(this).css('background-color', 'red');
+                },
+                eventClick:function(event){//查看事件
+                    var d = dialog({title:"查看教育场地申请",id:"prisonAnaly_detail_dialog",parent:$dialogParent(),
+                        content:'' ,//"url:${base}/education/eduSiteApply.do?detail&id=" + event.id,
+                        cancelVal: "关闭",cancel: true ,width: "500px",height: "300px",lock:true
+                    });
+                    d.showModal();
+                }
+            }
+        );
+    })(jQuery);
+</script>
+</body>
+</html>

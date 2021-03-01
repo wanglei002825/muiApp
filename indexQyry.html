@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>首页</title>
+    
+	<!--App自定义的css-->
+	<link rel="stylesheet" type="text/css" href="css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="css/iconfont.css"/>
+	<!--标准mui.css-->
+    <link rel="stylesheet" type="text/css" href="css/mui.min.css">
+	<!--<link rel="stylesheet" type="text/css" href="css/layer.css"/>-->
+	<style>
+		.mui-grid-view.mui-grid-9{
+			background-color: #ffffff;
+		}
+		
+		mui-grid-view.mui-grid-9{
+			background-color: #ffffff;
+		}
+		.mui-grid-view.mui-grid-9 .mui-table-view-cell{
+			padding:0px 0px;
+			border-right:0px solid #eee;
+			border-bottom:0px solid #eee;
+		}
+		.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
+			font-size:0.8rem;
+		}
+		.icon{
+			width:2rem;
+			height: 2rem;
+		}
+		
+		.mui-popover{
+			display:block;
+			bottom: 60px;
+			width: 100%;
+		}
+		.mui-icon .mui-badge {
+		    font-size: 10px;
+		    line-height: 1.4;
+		    position: absolute;
+		    top: 8px;
+		    left: 100%;
+		    margin-left: -20px;
+		    padding: 1px 5px;
+		    color: #fff;
+		    background: red;
+		}
+	</style>
+		
+</head>
+<body>
+	<!-- 主页面标题 -->
+	<!-- <header id="headerId" class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 id="title" class="mui-title">首页</h1>
+		<button id='contactview' class="mui-pull-right mui-btn-link"><span class="mui-icon mui-icon-email" id="unread_tips"></span></button>
+	</header> -->
+	<nav class="mui-bar mui-bar-tab">
+		<a id="shouyTab" class="mui-tab-item mui-active" href="view/qiyry/home.html">
+			<span class="mui-icon mui-icon-home"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<!-- <a id="yingyTab" class="mui-tab-item" href="view/qiyry/yingy.html">
+			<span class="mui-icon iconfont icon-dongtai"></span>
+			<span class="mui-tab-label">行业应用</span>
+		</a>
+		<a id="xiaoxTab" class="mui-tab-item" href="view/qiyry/xiaox.html">
+			<span class="mui-icon iconfont icon-yunshujingji-bai"></span>
+			<span class="mui-tab-label">消息中心</span>
+		</a> -->
+		<a id="wodTab" class="mui-tab-item" href="view/qiyry/wod.html">
+			<span class="mui-icon iconfont icon-guanli"></span>
+			<span class="mui-tab-label">我的</span>
+		</a>
+	</nav>
+	
+	<script src="js/mui/mui.min.js"></script>
+	<script src='js/jquery-3.1.1.js'></script>
+	<script src="js/util.js"></script>
+	<script src="js/indexQyry.js"></script>
+	<script src="js/iconfont.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/app.js"></script>
+	
+	<script type="text/javascript">
+		$(function(){
+			
+		});
+		var main = null;
+		mui.plusReady(function(){
+			mui.init({
+				swipeBack: true,
+				statusBarBackground: '#4cb7d4',
+				gestureConfig: {
+					//doubletap: true
+				},
+			});
+				
+		});
+		
+   		mui.plusReady(function() {
+			//仅支持竖屏显示
+			plus.screen.lockOrientation("portrait-primary");
+			main = plus.webview.currentWebview();
+			
+			// 在程序运行时接收到的消息不显示在系统消息中心
+			plus.push.setAutoNotification(false);
+			
+		});
+		
+		mui("body").on("tap","#contactview",function(){
+            mui.openWindow({
+				url: 'view/gongz/xiaoxzx.html',
+				id: 'xiaoxzx',
+				show: {
+					aniShow: 'pop-in'
+				},
+				waiting: {
+					autoShow: false
+				}
+			});
+        });
+		
+    </script>
+</body>
+</html>

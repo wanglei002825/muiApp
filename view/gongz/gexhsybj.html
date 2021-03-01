@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>个性化首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css">
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css">
+		<style>
+			body {
+				background-color: #ffffff;
+				color: #000000;
+			}
+			
+			.headerHight{
+				height:7vw;
+				min-height: 7vw;
+			}
+			.colStyle{
+				padding:3vw;
+			}
+			.colStyleTb{
+				padding:1vw 5vw 1vw 1vw;
+			}
+			
+			.mui-search:before{
+				margin-top:-25px;
+			}
+			
+			.inputBorder{
+				border-bottom:0px;
+				border-top: 0px;
+				border-right: 0px;
+			}
+			.mui-card-content{
+				border: 1px solid #efeff4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个性定制</h1>
+			<button type="button" id="save" class="mui-btn mui-btn-blue mui-pull-right mui-btn-link">保存</button>
+		</header>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div style="margin-top: 61px;">
+						<h3 style="text-align:center;">当前布局</h3>
+					</div>
+					
+					<div class="mui-card" style="margin-top: 30px;">
+						<div class="mui-card-header headerHight">
+							<input id="title" class="biaot inputBorder" value=""/>
+							<span id="clear" class="mui-icon mui-icon-clear"></span>
+						</div>
+					</div>
+					
+					<div id="content" style="margin-top: 10px;padding: 10vw;height: 50vw;">
+						<div id="gg_si" class="mui-card-content" style="display: none;">
+							<div class="mui-row" style="width:100%">
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+										<h5 id="gg_si_1_name">+添加</h5>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+										<svg class="icon" aria-hidden="true">
+										  <use id="gg_si_1_icon" xlink:href=""></use>
+										</svg>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+										<h5 id="gg_si_2_name">+添加</h5>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+										<svg class="icon" aria-hidden="true">
+										  <use id="gg_si_2_icon" xlink:href=""></use>
+										</svg>
+									</div>
+							</div>
+							<div class="mui-row tableViewBorderTop" style="width:100%">
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+										<h5 id="gg_si_3_name">+添加</h5>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+										<svg class="icon" aria-hidden="true">
+										  <use id="gg_si_3_icon" xlink:href=""></use>
+										</svg>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+										<h5 id="gg_si_4_name">+添加</h5>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+										<svg class="icon" aria-hidden="true">
+										  <use id="gg_si_4_icon" xlink:href=""></use>
+										</svg>
+									</div>
+							</div>
+						</div>
+						
+						<div id="gg_er" class="mui-card-content" style="display: none;">
+							<div class="mui-row" style="width:100%">
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+										<h5 id="gg_er_1_name">+添加</h5>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+										<svg class="icon" aria-hidden="true">
+										  <use id="gg_er_1_icon" xlink:href=""></use>
+										</svg>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+										<h5 id="gg_er_2_name">+添加</h5>
+									</div>
+									<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+										<svg class="icon" aria-hidden="true">
+										  <use id="gg_er_2_icon" xlink:href=""></use>
+										</svg>
+									</div>
+							</div>
+						</div>
+						
+						<div id="gg_sanY" class="mui-card-content" style="display: none;">
+							<div class="mui-row" style="width:100%">
+									<div class="mui-col-sm-6 mui-col-xs-6 colStyle" style="text-align:center;">
+										<h5 id="gg_sanY_1_name">+添加</h5>
+										<svg class="icon" aria-hidden="true" style="margin-top: 3vw;">
+										  <use id="gg_sanY_1_icon" xlink:href=""></use>
+										</svg>
+									</div>
+								<div class="mui-col-sm-6 mui-col-xs-6 colStyle tableViewBorderLeft" >
+									<div class="mui-row" style="width:100%">
+											<div class="mui-col-sm-8 mui-col-xs-8 colStyle" >
+												<h5 id="gg_sanY_2_name">+添加</h5>
+											</div>
+											<div class="mui-col-sm-4 mui-col-xs-4 colStyleTb" >
+												<svg class="icon" aria-hidden="true">
+												  <use id="gg_sanY_2_icon" xlink:href=""></use>
+												</svg>
+											</div>
+									</div>
+									<div class="mui-row tableViewBorderTop" style="width:100%">
+											<div class="mui-col-sm-8 mui-col-xs-8 colStyle" >
+												<h5 id="gg_sanY_3_name">+添加</h5>
+											</div>
+											<div class="mui-col-sm-4 mui-col-xs-4 colStyleTb" >
+												<svg class="icon" aria-hidden="true">
+												  <use id="gg_sanY_3_icon" xlink:href=""></use>
+												</svg>
+											</div>
+									</div>
+								</div>
+						    </div>
+						</div>
+						
+						<div id="gg_sanZ" class="mui-card-content" style="display: none;">
+							<div class="mui-row" style="width:100%">
+								<div class="mui-col-sm-6 mui-col-xs-6" >
+									<div class="mui-row" style="width:100%">
+											<div class="mui-col-sm-6 mui-col-xs-6 colStyle" >
+												<h5 id="gg_sanZ_1_name">+添加</h5>
+											</div>
+											<div class="mui-col-sm-6 mui-col-xs-6 colStyleTb" >
+												<svg class="icon" aria-hidden="true">
+												  <use id="gg_sanZ_1_icon" xlink:href=""></use>
+												</svg>
+											</div>
+									</div>
+									<div class="mui-row tableViewBorderTop" style="width:100%">
+											<div class="mui-col-sm-6 mui-col-xs-6 colStyle" >
+												<h5 id="gg_sanZ_2_name">+添加</h5>
+											</div>
+											<div class="mui-col-sm-6 mui-col-xs-6 colStyleTb" >
+												<svg class="icon" aria-hidden="true">
+												  <use id="gg_sanZ_2_icon" xlink:href=""></use>
+												</svg>
+											</div>
+									</div>
+								</div>
+									<div class="mui-col-sm-6 mui-col-xs-6 tableViewBorderLeft colStyle" style="text-align:center;">
+										<h5 id="gg_sanZ_3_name">+添加</h5>
+										<svg class="icon" aria-hidden="true" style="margin-top: 3vw;">
+										  <use id="gg_sanZ_3_icon" xlink:href=""></use>
+										</svg>
+									</div>
+						    </div>
+						</div>
+						
+					</div>
+					
+					<div id="mob" style="height: 30vw;margin-top: 10px;padding:2vw;background: #f7f7f7;">
+						<img id="mob1" src="../../images/buj/icon-1-1.png" style="width: 23vw;"/>
+						<img id="mob2" src="../../images/buj/icon-2-1.png" style="width: 23vw;"/>
+						<img id="mob3" src="../../images/buj/icon-3-1.png" style="width: 23vw;"/>
+						<img id="mob4" src="../../images/buj/icon-4-1.png" style="width: 23vw;"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src='../../js/jquery-3.1.1.js'></script>
+		<script src="../../js/mui/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/iconfont.js"></script>
+		<script src="../../js/config.js"></script>
+		
+		<script type="text/javascript">
+			mui.init();
+			//初始化页面区域滚动
+			mui('.mui-scroll-wrapper').scroll();
+			
+			var pulldown = false; //初始下拉刷新状态
+			var containerId = ".mui-content";
+			
+			function pulldownRefresh() {
+				setTimeout(function() {
+					mui(containerId).pullRefresh().endPulldownToRefresh(pulldown); //参数为true代表没有编辑数据了
+					
+					mui(containerId).pullRefresh().enablePullupToRefresh();
+				}, 500);
+			}
+			
+			$(function() { //比mui.plusReady函数先执行
+				
+			});
+
+			var mainMv;
+			var parentId,type,title;
+			var name_1,icon_1,name_2,icon_2,name_3,icon_3,name_4,icon_4;
+			var tabContentId;
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				type = self.type;//获得参数
+				title = self.title;//获得参数
+				parentId = self.parentId;//获得参数
+				var contentHtml = self.contentHtml;//获得参数
+				name_1 = self.name_1;//获得参数
+				icon_1 = self.icon_1;//获得参数
+				name_2 = self.name_2;//获得参数
+				icon_2 = self.icon_2;//获得参数
+				name_3 = self.name_3;//获得参数
+				icon_3 = self.icon_3;//获得参数
+				name_4 = self.name_4;//获得参数
+				icon_4 = self.icon_4;//获得参数
+				
+				document.getElementById("title").value = title;
+				//document.getElementById("title").focus();
+				
+				buildGg(type,name_1,name_2,name_3,name_4,icon_1,icon_2,icon_3,icon_4,contentHtml);
+				
+				var mobId = "mob"+type;
+				document.getElementById(mobId).src = "../../images/buj/icon-"+type+".png";
+			});
+			
+			function buildGg(type,name_1,name_2,name_3,name_4,
+				icon_1,icon_2,icon_3,icon_4,contentHtml){
+				if('1' === type){//四宫格
+					tabContentId = "gg_si";
+					$('#gg_si').css('display','block');
+					//$('#content').append(contentHtml);
+					//$('#content').load('gg_si.html');
+					valuePutOn(type,"gg_si_",name_1,name_2,name_3,name_4,
+						icon_1,icon_2,icon_3,icon_4);
+				} else if('2' === type){//二宫格
+					tabContentId = "gg_er";
+					$('#gg_er').css('display','block');
+					valuePutOn(type,"gg_er_",name_1,name_2,name_3,name_4,
+						icon_1,icon_2,icon_3,icon_4);
+				} else if('3' === type){//三右宫格
+					tabContentId = "gg_sanY";
+					$('#gg_sanY').css('display','block');
+					valuePutOn(type,"gg_sanY_",name_1,name_2,name_3,name_4,
+						icon_1,icon_2,icon_3,icon_4);
+				} else if('4' === type){//三左宫格
+					tabContentId = "gg_sanZ";
+					$('#gg_sanZ').css('display','block');
+					valuePutOn(type,"gg_sanZ_",name_1,name_2,name_3,name_4,
+						icon_1,icon_2,icon_3,icon_4);
+				}
+			}
+			function valuePutOn(type,headId,name_1,name_2,name_3,name_4,
+				icon_1,icon_2,icon_3,icon_4){
+				$("#"+headId+"1_name").text(name_1);
+				$("#"+headId+"1_icon").attr("xlink:href",icon_1);
+				
+				$("#"+headId+"2_name").text(name_2);
+				$("#"+headId+"2_icon").attr("xlink:href",icon_2);
+				
+				if('1' === type || '3' === type || '4' === type){
+					$("#"+headId+"3_name").text(name_3);
+					$("#"+headId+"3_icon").attr("xlink:href",icon_3);
+				}
+				if('1' === type){
+					$("#"+headId+"4_name").text(name_4);
+					$("#"+headId+"4_icon").attr("xlink:href",icon_4);
+				}
+			}
+			
+			mui("body").on("tap","#clear",function(){
+				document.getElementById("title").value = "";
+			});
+
+			mui(".mui-card div").on('tap', 'label', function() {
+				var more = this.innerHTML;
+			});
+			
+			mui("#mob").on('tap', 'img', function() {
+				var id = this.getAttribute("id");
+				imgSwich(this,id);
+			});
+			function imgSwich(object,id){
+				document.getElementById("mob1").src = "../../images/buj/icon-1-1.png";
+				document.getElementById("mob2").src = "../../images/buj/icon-2-1.png";
+				document.getElementById("mob3").src = "../../images/buj/icon-3-1.png";
+				document.getElementById("mob4").src = "../../images/buj/icon-4-1.png";
+				
+				$('#gg_si').css('display','none');
+				$('#gg_er').css('display','none');
+				$('#gg_sanY').css('display','none');
+				$('#gg_sanZ').css('display','none');
+				if('mob1' === id){
+					type = "1";
+					tabContentId = "gg_si";
+					object.src = "../../images/buj/icon-1.png";
+					$('#gg_si').css('display','block');
+				} else if('mob2' === id){
+					type = "2";
+					tabContentId = "gg_er";
+					object.src = "../../images/buj/icon-2.png";
+					$('#gg_er').css('display','block');
+				} else if('mob3' === id){
+					type = "3";
+					tabContentId = "gg_sanY";
+					object.src = "../../images/buj/icon-3.png";
+					$('#gg_sanY').css('display','block');
+				} else if('mob4' === id){
+					type = "4";
+					tabContentId = "gg_sanZ";
+					object.src = "../../images/buj/icon-4.png";
+					$('#gg_sanZ').css('display','block');
+				}
+			}
+			
+			mui("body").on("tap","#save",function(){
+				title = document.getElementById("title").value;
+				if("" === title){
+					mui.toast("输入标题名称");
+					return;
+				}
+				var contentObject = $('#'+tabContentId);
+				var contentHtml = contentObject.html();
+				var array = contentHtml.split("添加");
+				if(array.length > 1){
+					mui.toast("还需添加"+(array.length-1)+"个功能");
+					return;
+				}
+				
+				var contentHtmlNew="";
+				if("1" === type){
+					var reg = new RegExp("gg_si","g");//g,表示全部替换
+					contentHtmlNew = contentHtml.replace(reg,parentId);
+				} else if("2" === type){
+					var reg = new RegExp("gg_er","g");//g,表示全部替换
+					contentHtmlNew = contentHtml.replace(reg,parentId);
+				} else if("3" === type){
+					var reg = new RegExp("gg_sanY","g");//g,表示全部替换
+					contentHtmlNew = contentHtml.replace(reg,parentId);
+				} else if("4" === type){
+					var reg = new RegExp("gg_sanZ","g");//g,表示全部替换
+					contentHtmlNew = contentHtml.replace(reg,parentId);
+				}
+				
+				// 获得列表界面的webview
+				var gexhsyIndex = plus.webview.getWebviewById('gexhsyIndex');
+				// 触发列表界面的自定义事件（refresh）,从而进行数据刷新
+				mui.fire(gexhsyIndex,'backData',
+					{type:type,
+					title:title,
+					contentHtml:contentHtmlNew,
+					parentId:parentId},
+				);
+				
+				mui.back();
+	        });
+	
+			mui(".mui-card-content div").on('tap', '.colStyle', function() {
+				var H5Id = this.firstChild.nextSibling.getAttribute("id");
+				var idCommon = H5Id.substr(0,H5Id.lastIndexOf("_")+1);
+				
+				mui.openWindow({
+					url: 'gexhsylb.html',
+					id: 'gexhsylb',
+					show: {
+						aniShow: 'pop-in'
+					},
+					extras: {//extras里面的就是参数了
+					    idCommon:idCommon,
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			});
+			//监听自定义事件，用于和B.html页面进行通信
+			window.addEventListener("backData", function(e) {
+				var name = e.detail.name;
+				var icon = e.detail.icon;
+				var idCommon = e.detail.idCommon;
+				
+				$("#"+idCommon+"name").text(name);
+				$("#"+idCommon+"icon").attr("xlink:href",icon);
+			});
+	
+		</script>
+	</body>
+
+</html>

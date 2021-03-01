@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>消息中心</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" href="../../css/common.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			.mui-views,
+			.mui-view,
+			.mui-pages,
+			.mui-page,
+			.mui-page-content {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #efeff4;
+			}
+			.mui-pages {
+				top: 46px;
+				height: auto;
+			}
+			.mui-scroll-wrapper,
+			.mui-scroll {
+				background-color: #efeff4;
+			}
+			.mui-page.mui-transitioning {
+				-webkit-transition: -webkit-transform 200ms ease;
+				transition: transform 200ms ease;
+			}
+			.mui-page-left {
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			.mui-ios .mui-page-left {
+				-webkit-transform: translate3d(-20%, 0, 0);
+				transform: translate3d(-20%, 0, 0);
+			}
+			.mui-navbar {
+				position: fixed;
+				right: 0;
+				left: 0;
+				z-index: 10;
+				height: 44px;
+				background-color: #f7f7f8;
+			}
+			.mui-navbar .mui-bar {
+				position: absolute;
+				background: transparent;
+				text-align: center;
+			}
+			.mui-android .mui-navbar-inner.mui-navbar-left {
+				opacity: 0;
+			}
+			.mui-ios .mui-navbar-left .mui-left,
+			.mui-ios .mui-navbar-left .mui-center,
+			.mui-ios .mui-navbar-left .mui-right {
+				opacity: 0;
+			}
+			.mui-navbar .mui-btn-nav {
+				-webkit-transition: none;
+				transition: none;
+				-webkit-transition-duration: .0s;
+				transition-duration: .0s;
+			}
+			.mui-navbar .mui-bar .mui-title {
+				display: inline-block;
+				position: static;
+				width: auto;
+			}
+			.mui-page-shadow {
+				position: absolute;
+				right: 100%;
+				top: 0;
+				width: 16px;
+				height: 100%;
+				z-index: -1;
+				content: '';
+			}
+			.mui-page-shadow {
+				background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+				background: linear-gradient(to right, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, .01) 50%, rgba(0, 0, 0, .2) 100%);
+			}
+			.mui-navbar-inner.mui-transitioning,
+			.mui-navbar-inner .mui-transitioning {
+				-webkit-transition: opacity 200ms ease, -webkit-transform 200ms ease;
+				transition: opacity 200ms ease, transform 200ms ease;
+			}
+			.mui-page {
+				display: none;
+			}
+			.mui-pages .mui-page {
+				display: block;
+			}
+			.mui-page .mui-table-view:first-child {
+				margin-top: 15px;
+			}
+			.mui-page .mui-table-view:last-child {
+				margin-bottom: 30px;
+			}
+			.mui-table-view {
+				margin-top: 20px;
+			}
+			.mui-table-view:after {
+				height: 0;
+			}
+			.mui-table-view span.mui-pull-right {
+				color: #999;
+			}
+			.mui-table-view-divider {
+				background-color: #efeff4;
+				font-size: 14px;
+			}
+			.mui-table-view-divider:before,
+			.mui-table-view-divider:after {
+				height: 0;
+			}
+			.mui-content-padded {
+				margin: 10px 0px;
+			}
+			.mui-locker {
+				margin: 35px auto;
+				display: none;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../../css/feedback-page.css" />
+	</head>
+
+	<body>
+		<!-- 主页面标题 -->
+		<header id="headerId" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 id="title" class="mui-title">消息中心</h1>
+			<button type="button" id="setting" class="mui-btn mui-btn-blue mui-pull-right mui-btn-link">设置</button>
+		</header>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<h5 class="biaot" style="margin-left:3vw;margin-top:51px;">路况快报</h5>
+					<div class="mui-card" style="margin: 2vw;">
+						<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+						    <li class="mui-table-view-cell">
+						        <div class="mui-table">
+						            <div class="mui-table-cell mui-col-xs-10">
+						                <h4 class="mui-ellipsis" style="color:#000000;">江苏多条高速因雾关闭</h4>
+						                <p class="mui-h6 mui-ellipsis">目前，受雾霾天气影响，我省盐城、连云港、淮安、扬州部分高速公路实行特级交通管制（封闭）措施。</p>
+										<h5>2020-02-17 08:17</h5>
+						            </div>
+						        </div>
+						    </li>
+						    <li class="mui-table-view-cell">
+						        <div class="mui-table">
+						            <div class="mui-table-cell mui-col-xs-10">
+						                <h4 class="mui-ellipsis" style="color:#000000;">G2京沪高速苏州段由于临时交通管制</h4>
+						                <p class="mui-h6 mui-ellipsis">G2京沪高速苏州段由于临时交通管制，由北京往上海方向1189K花桥收费站附近现场车多缓行。</p>
+						    			<h5>2020-02-17 09:16</h5>
+						            </div>
+						        </div>
+						    </li>
+						</ul>
+					</div>
+					
+					<h5 class="biaot" style="margin-left:3vw;margin-top:2vw;">通航公告</h5>
+					<div class="mui-card" style="margin: 2vw;">
+						<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+						    <li class="mui-table-view-cell">
+						        <div class="mui-table">
+						            <div class="mui-table-cell mui-col-xs-10">
+						                <h4 class="mui-ellipsis" style="color:#000000;">皂河船闸党员先锋队为船员摆渡</h4>
+						                <p class="mui-h6 mui-ellipsis">皂河船闸地处骆马湖畔，上游船舶停泊区又处在大运河与骆马湖湖口的交汇处，水情较复杂</p>
+										<h5>2020-02-17 09:07</h5>
+						            </div>
+						        </div>
+						    </li>
+						    <li class="mui-table-view-cell">
+						        <div class="mui-table">
+						            <div class="mui-table-cell mui-col-xs-10">
+						                <h4 class="mui-ellipsis" style="color:#000000;">宝应航道站雪中紧急修复异常航标</h4>
+						                <p class="mui-h6 mui-ellipsis">京杭运河宝应航道管理站泗阳航政管理大队冒雪修复一处失常航标</p>
+						    			<h5>2020-02-18 08:15</h5>
+						            </div>
+						        </div>
+						    </li>
+						</ul>
+					</div>
+					
+					<h5 class="biaot" style="margin-left:3vw;margin-top:2vw;">其他消息</h5>
+					<div class="mui-card" style="margin: 2vw;">
+						<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+						    <li class="mui-table-view-cell">
+						        <div class="mui-table">
+						            <div class="mui-table-cell mui-col-xs-10">
+						                <h4 class="mui-ellipsis" style="color:#000000;">岗位上的别样祝福</h4>
+						                <p class="mui-h6 mui-ellipsis">2月17日，是省交通综合执法局徐盐支队第一大队外勤中队长郑友文连续在岗工作的第19天</p>
+										<h5>2020-02-17 16:07</h5>
+						            </div>
+						        </div>
+						    </li>
+						    <li class="mui-table-view-cell">
+						        <div class="mui-table">
+						            <div class="mui-table-cell mui-col-xs-10">
+						                <h4 class="mui-ellipsis" style="color:#000000;">复工企业返回苏州定制包车</h4>
+						                <p class="mui-h6 mui-ellipsis">巴士管家上线了“复工企业返苏人员运输需求服务平台</p>
+						    			<h5>2020-02-17 16:03</h5>
+						            </div>
+						        </div>
+						    </li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="../../js/mui.min.js "></script>
+	<script src="../../js/mui.view.js "></script>
+	<script src='../../libs/easymob-webim-sdk/jquery-1.11.1.js'></script>
+	<script src='../../libs/easymob-webim-sdk/strophe-custom-2.0.0.js'></script>
+	<script src='../../libs/easymob-webim-sdk/json2.js'></script>
+	<script src="../../libs/easymob-webim-sdk/easemob.im-1.0.5.js"></script>
+	<script src='../../js/feedback.js'></script>
+	<!-- <script src="../../js/feedback-page.js"></script> -->
+	<script src="../../js/mui.locker.js"></script>
+	<script src="../../js/app.js"></script>
+	<script>
+		mui.init();
+		//初始化页面区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		
+		mui.plusReady(function() {
+			//mui('.mui-content').scroll();
+		});
+		
+		mui("body").on("tap","#setting",function(){
+            mui.openWindow({
+				url: 'xiaoxzxSetting.html',
+				id: 'xiaoxzxSetting',
+				show: {
+					aniShow: 'pop-in'
+				},
+				waiting: {
+					autoShow: false
+				}
+			});
+        });
+	</script>
+
+</html>

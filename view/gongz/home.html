@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<!--App自定义的css-->
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.css">
+		<link rel="stylesheet" type="text/css" href="../../css/mui.poppicker.css">
+		<style>
+			body {
+				color: gray;
+			}
+			
+			.headerHight{
+				height:7vw;
+				min-height: 7vw;
+			}
+			.colStyle{
+				padding:3vw;
+			}
+			.colStyleTb{
+				padding:1vw 5vw 1vw 1vw;
+			}
+			
+			.mui-search:before{
+				margin-top:-25px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="title" >
+			<div class="mui-card" style="background-color:#4cb7d4;color:#ffffff;">
+				<label id="location" style="margin-left: 1rem;font-weight: bold;width: 18%;">
+					<span id="city">南京</span>
+					<span class="mui-icon mui-icon-location" style="font-size:18px"></span>
+				</label>
+				<div class="mui-input-row mui-search mui-content-padded" style="display:inline-flex;margin-left: 1rem;width: 50%;">
+				    <input type="search" class="mui-input-clear" style="margin:2px 0px 5px 0px;background-color:#52c7e6;" placeholder="请输入关键字"> 
+				</div>
+				<label id="QRCode" style="display: inline-block;width: 10%;">
+					<svg class="icon" aria-hidden="true" style="vertical-align:-0.75em;">
+					  <use xlink:href="#icon-scan_black"></use>
+					</svg>
+				</label>
+				<label id="contactview" style="display: inline-block;width: 10%;">
+					<svg class="icon" aria-hidden="true" style="vertical-align:-0.75em;">
+					  <use xlink:href="#icon-xiaoxi1"></use>
+					</svg>
+				</label>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div id="slider" class="mui-slider" style="margin-top: 45px;">
+						<div class="mui-slider-group mui-slider-loop">
+							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img src="../../images/jiaotfc/G40.png">
+									<p class="mui-slider-title">海启高速与G40沪陕高速相连接的启东北枢纽</p>
+								</a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="../../images/jiaotfc/hutcjdq.png">
+									<p class="mui-slider-title">沪通长江大桥斜拉索全部架设到位</p>
+								</a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="../../images/jiaotfc/yihryye.png">
+									<p class="mui-slider-title">江苏3天运送千余医护人员赴鄂</p>
+								</a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="../../images/jiaotfc/qljqbz.png">
+									<p class="mui-slider-title">全力加强公路交通保通保畅</p>
+								</a>
+							</div>
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="../../images/jiaotfc/xtgjtd.png">
+									<p class="mui-slider-title">锡通过江通道公路接线工程</p>
+								</a>
+							</div>
+							<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img src="../../images/jiaotfc/hutcjdq.png">
+									<p class="mui-slider-title">沪通长江大桥斜拉索全部架设到位</p>
+								</a>
+							</div>
+						</div>
+						<div class="mui-slider-indicator mui-text-right">
+							<div class="mui-indicator mui-active"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+						</div>
+					</div>
+					
+					<div class="mui-card" style="margin-top:10px;padding:6px;">
+						<div class="mui-row" style="width:100%">
+						    <div class="mui-col-xs-4" style="text-align:center;">
+						    	<!-- <svg class="icon" aria-hidden="true">
+						    	  <use xlink:href="#icon-shishilukuang"></use>
+						    	</svg> -->
+								<img src="../../images/icon/yongdulk.png" style="height: 35px;width: 35px;"/>
+						    	<div style="margin-right: 5px;">实时路况</div>
+						    </div>
+						    <div class="mui-col-xs-4" style="text-align:center;">
+						    	<!-- <svg class="icon" aria-hidden="true">
+						    	  <use xlink:href="#icon-jiaotonggongjiaochekanfangtuandabamianxing-copy1"></use>
+						    	</svg> -->
+								<img src="../../images/icon/gongjdt.png" style="height: 35px;width: 35px;"/>
+						    	<div style="margin-right: 5px;">公交地铁</div>
+						    </div>
+						    <div class="mui-col-xs-4" style="text-align:center;">
+						    	<!-- <svg class="icon" aria-hidden="true">
+						    	  <use xlink:href="#icon-dache_fill"></use>
+						    	</svg> -->
+								<img src="../../images/icon/dac.png" style="height: 35px;width: 35px;"/>
+						    	<div style="margin-right: 5px;">打车</div>
+						    </div>
+						</div>
+					</div>
+					
+					<div id="sncxLabel" class="mui-card" style="margin-top: 10px;">
+						<div class="mui-card-header headerHight">
+							<h5 class="biaot" style="1">市内出行</h5>
+							<label id="sncxLabel_" class="mui-h5">更多</label>
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-row" style="width:100%">
+						        <div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+									<h5 id="sncxLabel_1_name">路况</h5>
+						        </div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="sncxLabel_1_icon" xlink:href="#icon-shishilukuang"></use>
+									</svg>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+									<h5 id="sncxLabel_2_name">公共自行车</h5>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="sncxLabel_2_icon" xlink:href="#icon-zihangche"></use>
+									</svg>
+								</div>
+						    </div>
+							<div class="mui-row tableViewBorderTop" style="width:100%">
+							    <div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+									<h5 id="sncxLabel_3_name">停车场</h5>
+							    </div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="sncxLabel_3_icon" xlink:href="#icon-tingchechang"></use>
+									</svg>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+									<h5 id="sncxLabel_4_name">维修</h5>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="sncxLabel_4_icon" xlink:href="#icon-weixiu"></use>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="kccx" class="mui-card" style="margin-top: 10px;">
+						<div class="mui-card-header headerHight">
+							<h5 class="biaot" style="1">跨城出行</h5>
+							<label id="kccx_" class="mui-h5">更多</label>
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-row" style="width:100%">
+						        <div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+									<h5 id="kccx_1_name">公路路况</h5>
+						        </div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="kccx_1_icon" xlink:href="#icon-shishilukuang"></use>
+									</svg>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+									<h5 id="kccx_2_name">汽车票</h5>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="kccx_2_icon" xlink:href="#icon-tickect2-sel"></use>
+									</svg>
+								</div>
+						    </div>
+							<div class="mui-row tableViewBorderTop" style="width:100%">
+							    <div class="mui-col-sm-6 mui-col-xs-3 colStyle" >
+									<h5 id="kccx_3_name">火车票</h5>
+							    </div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="kccx_3_icon" xlink:href="#icon-huochepiao"></use>
+									</svg>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyle tableViewBorderLeft" >
+									<h5 id="kccx_4_name">航班</h5>
+								</div>
+								<div class="mui-col-sm-6 mui-col-xs-3 colStyleTb" >
+									<svg class="icon" aria-hidden="true">
+									  <use id="kccx_4_icon" xlink:href="#icon-hangbandingdan"></use>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="zwfw" class="mui-card" style="margin-top: 10px;">
+						<div class="mui-card-header headerHight">
+							<h5 class="biaot"  style="3">政务服务</h5>
+							<label id="zwfw_" class="mui-h5">更多</label>
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-row" style="width:100%">
+						        <div class="mui-col-sm-6 mui-col-xs-6 colStyle" style="text-align:center;">
+									<h5 id="zwfw_1_name">处罚信息</h5>
+									<svg class="icon" aria-hidden="true" style="margin-top: 3vw;">
+									  <use id="zwfw_1_icon" xlink:href="#icon-UI_icon_jianyichufa"></use>
+									</svg>
+						        </div>
+								<div class="mui-col-sm-6 mui-col-xs-6 colStyle tableViewBorderLeft" >
+									<div class="mui-row" style="width:100%">
+										<div class="mui-col-sm-8 mui-col-xs-8 colStyle" >
+											<h5 id="zwfw_2_name">隐患随手拍</h5>
+										</div>
+										<div class="mui-col-sm-4 mui-col-xs-4 colStyleTb" >
+											<svg class="icon" aria-hidden="true">
+											  <use id="zwfw_2_icon" xlink:href="#icon-yinhuan"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="mui-row tableViewBorderTop" style="width:100%">
+										<div class="mui-col-sm-8 mui-col-xs-8 colStyle" >
+											<h5 id="zwfw_3_name">12328热线</h5>
+										</div>
+										<div class="mui-col-sm-4 mui-col-xs-4 colStyleTb" >
+											<svg class="icon" aria-hidden="true">
+											  <use id="zwfw_3_icon" xlink:href="#icon-rexian"></use>
+											</svg>
+										</div>
+									</div>
+								</div>
+						    </div>
+						</div>
+					</div>
+					
+					<!-- <div class="mui-card" style="margin-top: 10px;">
+						<div class="mui-card-content">
+							<div class="mui-row muiRowMarginTop">
+						        <div class="mui-col-sm-6 mui-col-xs-6 titleView" >
+						        	<span class="shux_lan"></span>
+						            <label class="mui-h5">年度累计完成投资</label>
+						        </div>
+						        <div class="mui-col-sm-6 mui-col-xs-6 titleView" >
+						        	<span class="shux_lan"></span>
+						        	<label class="mui-h5">年度公路货运量</label>
+						        </div>
+						    </div>
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-row">
+						        <div class="mui-col-sm-6 mui-col-xs-6 tableViewBorder" >
+									<div class="titleViewDate">
+						        		<label class="mui-h5" id="niandljwctz_date"></label>
+						        	</div>
+									<div class="chart_shuz" id="niandljwctz_chart"></div>	        	
+						        </div>
+						        <div class="mui-col-sm-6 mui-col-xs-6">
+									<div class="titleViewDate">
+						        		<label class="mui-h5" id="gonglhyl_date"></label>
+						        	</div>
+									<div class="chart_shuz" id="gonglhyl_chart"></div>	  	        	
+						        </div>
+						    </div>
+						</div>
+					</div>
+					
+					<div class="mui-card" style="margin-top: 10px;">
+						<div class="mui-card-header">
+							<div class="mui-row " style="width:100%">
+								<div class="mui-col-sm-2 mui-col-xs-2" style="text-align:right">
+									<img src="../../images/Group8.png" />
+								</div>
+								<div class="mui-col-sm-8 mui-col-xs-8">
+									当日公路客运联网售票量
+									<label id="gongllwspl_date" class="mui-h5" style="display: block;"></label>
+								</div>
+								<div class="mui-col-sm-2 mui-col-xs-2" style="text-align:left">
+									<img src="../../images/Group6.png" />
+								</div>	        
+						    </div>
+						</div>
+						<div class="mui-card-content">
+							<div class="mui-row" style="width:100%">
+						        <div class="mui-col-sm-12 mui-col-xs-12" >
+									<div class="chart" id="gongllwspl_chart" style="height: 20vw;"></div>	        	
+						        </div>
+						    </div>
+						</div>
+					</div> -->
+					
+				</div>
+			</div>
+		</div>
+		<script src='../../js/jquery-3.1.1.js'></script>
+		<script src="../../js/mui/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/iconfont.js"></script>
+		<script src="../../js/config.js"></script>
+		<script src="../../js/mui/mui.picker.js"></script>
+		<script src="../../js/mui/mui.poppicker.js"></script>
+		<script src="../../js/mui/city.data.js"></script>
+		<script src="../../js/mui/city.data-3.js"></script>
+		
+		<script type="text/javascript">
+			mui.init();
+			//初始化页面区域滚动
+			mui('.mui-scroll-wrapper').scroll();
+			
+			var pulldown = false; //初始下拉刷新状态
+			var containerId = ".mui-content";
+			
+			function pulldownRefresh() {
+				setTimeout(function() {
+					mui(containerId).pullRefresh().endPulldownToRefresh(pulldown); //参数为true代表没有更多数据了
+					
+					mui(containerId).pullRefresh().enablePullupToRefresh();
+				}, 500);
+			}
+			
+			var city_picker;
+			$(function() { //比mui.plusReady函数先执行
+				//选择省市区
+				city_picker = new mui.PopPicker({
+					layer: 3
+				});
+				//注意:city_picker.setData()里的值为cityData,不要写错
+				city_picker.setData(cityData);//省市
+				//city_picker.setData(cityData3);//省市县
+			});
+
+			var mainMv;
+			mui.plusReady(function() {
+				var originalData = plus.storage.getItem("original");
+				if("" != originalData && typeof(originalData) != "undefined"
+					&& "1" != originalData){
+					plus.storage.setItem("original", "1");
+					onlyOneContent();
+				}
+				
+				// 设置系统状态栏背景为蓝色
+				plus.navigator.setStatusBarBackground( "#4cb7d4" );
+				// 设置系统状态栏样式为浅色文字
+				plus.navigator.setStatusBarStyle( "UIStatusBarStyleBlackOpaque" );
+				
+				plus.geolocation.getCurrentPosition(translatePoint, function(e) {
+					// mui.toast("异常:" + e.message);
+				});
+				
+				var slider = mui("#slider");
+				slider.slider({
+					interval: 5000
+				});
+				
+				initContent();
+			});
+
+			function translatePoint(position) {
+				var currentLon = position.coords.longitude;
+				var currentLat = position.coords.latitude;
+				var city = position.address.city;
+				$("#city").html(city);
+			}
+			
+			//点击事件的DOM对象对应的ID值要一致
+			$("#location").on("tap", function () {
+				setTimeout(function () {
+					city_picker.show(function (items) {
+						if ((items[0] || {}).text == undefined) {
+							(items[0] || {}).text = "";
+						} else if ((items[1] || {}).text == undefined) {
+							(items[1] || {}).text = "";
+						} else if ((items[2] || {}).text == undefined) {
+							(items[2] || {}).text = "";
+						}
+						//该ID为接收城市ID字段 
+						//$("#city").val((items[0] || {}).text + "-" + (items[1] || {}).text + "-" + (items[2] || {}).text);
+						$("#city").html((items[1] || {}).text);
+					});
+					//200为事件延迟时间(毫秒),可以设置false为没有延迟,点击立即执行
+				}, 200);
+			});
+			
+			//扫码
+			$("#QRCode").on("tap", function () {
+				//appendByCamera();
+				mui.openWindow({
+					url: 'erwmsm.html',
+					id: 'erwmsm',
+					show: {
+						aniShow: 'pop-in'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+			});	
+			// 拍照添加文件
+            function appendByCamera(){
+                plus.camera.getCamera().captureImage(function(e){
+                    console.log(e);
+                    plus.io.resolveLocalFileSystemURL(e, function(entry) {
+                    var path = entry.toLocalURL();
+                    //document.getElementById("upload"+imgId).src = path;
+                    }, function(e) {
+                        mui.toast("读取拍照文件错误：" + e.message);
+                    });
+    
+                });    
+            }
+
+			mui(".mui-card div").on('tap', 'label', function() {
+				var more = this.innerHTML;
+				if('更多' === more){
+					mui.openWindow({
+						url: 'gexhsy.html',
+						id: 'gexhsy',
+						show: {
+							aniShow: 'pop-in'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+				}	
+			});
+			
+			mui("body").on("tap","#contactview",function(){
+	            mui.openWindow({
+					url: 'xiaoxzx.html',
+					id: 'xiaoxzx',
+					show: {
+						aniShow: 'pop-in'
+					},
+					waiting: {
+						autoShow: false
+					}
+				});
+	        });
+	
+			function initContent(){
+				var sncxLabelparentIdNew = plus.storage.getItem("sncxLabelparentIdNew");
+				if("" != sncxLabelparentIdNew && typeof(sncxLabelparentIdNew) != "undefined"){
+					var type = plus.storage.getItem("sncxLabeltypeNew");
+					var title = plus.storage.getItem("sncxLabeltitleNew");
+					var contentHtml = plus.storage.getItem("sncxLabelcontentHtmlNew");
+					var parentId = plus.storage.getItem("sncxLabelparentIdNew");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+				}
+				
+				var kccxparentIdNew = plus.storage.getItem("kccxparentIdNew");
+				if("" != kccxparentIdNew && typeof(kccxparentIdNew) != "undefined"){
+					var type = plus.storage.getItem("kccxtypeNew");
+					var title = plus.storage.getItem("kccxtitleNew");
+					var contentHtml = plus.storage.getItem("kccxcontentHtmlNew");
+					var parentId = plus.storage.getItem("kccxparentIdNew");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+				}
+				
+				var zwfwparentIdNew = plus.storage.getItem("zwfwparentIdNew");
+				if("" != zwfwparentIdNew && typeof(zwfwparentIdNew) != "undefined"){
+					var type = plus.storage.getItem("zwfwtypeNew");
+					var title = plus.storage.getItem("zwfwtitleNew");
+					var contentHtml = plus.storage.getItem("zwfwcontentHtmlNew");
+					var parentId = plus.storage.getItem("zwfwparentIdNew");
+					$('#'+parentId+" .headerHight H5").text(title);
+					$('#'+parentId+" .headerHight H5").attr("style",type);
+					$('#'+parentId+" .mui-card-content").empty().append(contentHtml);
+				}
+			}
+			
+			function onlyOneContent(){
+				var sncxLabel_ = document.getElementById("sncxLabel_");
+				setContent(sncxLabel_);
+				
+				var kccx_ = document.getElementById("kccx_");
+				setContent(kccx_);
+				
+				var zwfw_ = document.getElementById("zwfw_");
+				setContent(zwfw_);
+			}
+			function setContent(obj){
+				var type = obj.parentNode.firstChild.nextSibling.getAttribute("style");
+				var title = obj.parentNode.firstChild.nextSibling.innerHTML;
+				var id = obj.parentNode.parentNode.getAttribute("id");
+				var contentHtml = obj.parentNode.parentNode.children[1].innerHTML;
+				
+				plus.storage.setItem(id+"type", type );
+				plus.storage.setItem(id+"title", title );
+				plus.storage.setItem(id+"contentHtml", contentHtml );
+				plus.storage.setItem(id+"parentId", id );
+			}
+
+		</script>
+	</body>
+
+</html>
